@@ -1,0 +1,24 @@
+{
+  "name": "presencenet-io",
+  "version": "1.0.0",
+  "description": "PresenceNet.io - The Home of Your Digital Soul",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server --port=3000 --open=/",
+    "dev": "npx live-server --port=3000 --open=/",
+    "serve": "npx http-server -p 3000 -o"
+  },
+  "keywords": [
+    "presencenet",
+    "digital-identity",
+    "xrp-ledger",
+    "web3"
+  ],
+  "author": "PresenceNet",
+  "license": "MIT",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thenextwaveapp/presencenet-io.git"
+  }
+}
