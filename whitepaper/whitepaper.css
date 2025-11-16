@@ -1,0 +1,639 @@
+/* PresenceNet Whitepaper Styles */
+
+/* ===== WHITEPAPER LAYOUT ===== */
+.whitepaper-page {
+    background: var(--seasalt);
+    padding-top: 80px;
+}
+
+/* Header */
+.whitepaper-header {
+    background: linear-gradient(135deg, var(--seasalt) 0%, var(--alice-blue) 100%);
+    padding: 80px 0 60px;
+    border-bottom: 1px solid rgba(225, 232, 237, 0.5);
+}
+
+.header-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.version-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(124, 156, 191, 0.1);
+    border: 1px solid var(--columbia-blue);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--lapis-lazuli);
+    margin-bottom: 24px;
+}
+
+.whitepaper-header h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+}
+
+.whitepaper-header .subtitle {
+    font-size: 24px;
+    color: var(--air-superiority);
+    font-weight: 400;
+    margin-bottom: 32px;
+    line-height: 1.4;
+}
+
+.trinity-inline {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 32px 0;
+}
+
+.trinity-mini {
+    font-size: 28px;
+    filter: drop-shadow(0 0 10px rgba(124, 156, 191, 0.3));
+    animation: gentle-glow 4s ease-in-out infinite;
+}
+
+.header-actions {
+    margin-top: 40px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--lapis-lazuli), var(--prussian-blue));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(14, 84, 145, 0.3);
+}
+
+.download-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Table of Contents Sidebar */
+.toc-sidebar {
+    position: fixed;
+    top: 180px;
+    left: 40px;
+    width: 240px;
+    background: rgba(248, 250, 251, 0.95);
+    border: 1px solid rgba(225, 232, 237, 0.6);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.toc-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+}
+
+.toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toc-link {
+    display: block;
+    color: var(--air-superiority);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+}
+
+.toc-link:hover {
+    color: var(--lapis-lazuli);
+    background: rgba(184, 210, 227, 0.15);
+    border-left-color: var(--lapis-lazuli);
+    padding-left: 16px;
+}
+
+.toc-link.active {
+    color: var(--lapis-lazuli);
+    background: rgba(184, 210, 227, 0.2);
+    border-left-color: var(--lapis-lazuli);
+    font-weight: 600;
+}
+
+/* Main Content */
+.whitepaper-content {
+    padding: 80px 0;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 320px 0 320px;
+}
+
+/* Sections */
+.wp-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 100px;
+}
+
+.wp-section h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.wp-section h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 40px 0 20px;
+    letter-spacing: -0.01em;
+}
+
+.wp-section h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 24px 0 16px;
+}
+
+.wp-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #4a5568;
+    margin-bottom: 24px;
+}
+
+.wp-section ul,
+.wp-section ol {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #4a5568;
+    margin-bottom: 24px;
+    padding-left: 32px;
+}
+
+.wp-section li {
+    margin-bottom: 12px;
+}
+
+.wp-section strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+/* Abstract Box */
+.abstract-box {
+    background: linear-gradient(135deg, rgba(184, 210, 227, 0.1), rgba(124, 156, 191, 0.05));
+    border: 2px solid var(--columbia-blue);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 32px 0;
+}
+
+.abstract-box p {
+    font-size: 19px;
+    line-height: 1.8;
+    color: var(--charcoal);
+    margin-bottom: 20px;
+}
+
+.abstract-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* Architecture Diagram */
+.architecture-diagram {
+    display: grid;
+    gap: 24px;
+    margin: 40px 0;
+}
+
+.arch-layer {
+    background: var(--seasalt);
+    border: 2px solid var(--alice-blue);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+}
+
+.arch-layer:hover {
+    border-color: var(--lapis-lazuli);
+    box-shadow: 0 8px 24px rgba(14, 84, 145, 0.1);
+    transform: translateY(-2px);
+}
+
+.arch-layer h4 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--lapis-lazuli);
+    margin: 0 0 16px;
+}
+
+.arch-layer p {
+    font-size: 17px;
+    color: #4a5568;
+    margin: 0;
+}
+
+/* Trinity Grid */
+.trinity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    margin: 48px 0;
+}
+
+.trinity-card {
+    background: var(--seasalt);
+    border: 2px solid var(--alice-blue);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.trinity-card:hover {
+    border-color: var(--lapis-lazuli);
+    box-shadow: 0 20px 40px rgba(14, 84, 145, 0.15);
+    transform: translateY(-8px);
+}
+
+.trinity-icon {
+    font-size: 48px;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 15px rgba(124, 156, 191, 0.3));
+}
+
+.trinity-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 20px;
+}
+
+.trinity-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.trinity-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Code Blocks */
+.code-block {
+    background: var(--prussian-blue);
+    border: 1px solid rgba(124, 156, 191, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 32px 0;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.code-block code {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    color: #e2e8f0;
+}
+
+/* Use Cases */
+.use-case {
+    background: rgba(248, 250, 251, 0.8);
+    border-left: 4px solid var(--lapis-lazuli);
+    padding: 32px;
+    margin: 32px 0;
+    border-radius: 12px;
+}
+
+.use-case h3 {
+    margin-top: 0;
+    font-size: 24px;
+    color: var(--lapis-lazuli);
+}
+
+.use-case p {
+    margin-bottom: 0;
+}
+
+/* Roadmap Timeline */
+.roadmap-timeline {
+    display: grid;
+    gap: 32px;
+    margin: 48px 0;
+}
+
+.roadmap-item {
+    background: var(--seasalt);
+    border: 2px solid var(--alice-blue);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.roadmap-item:hover {
+    border-color: var(--lapis-lazuli);
+    box-shadow: 0 12px 30px rgba(14, 84, 145, 0.1);
+}
+
+.roadmap-date {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--lapis-lazuli), var(--prussian-blue));
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.roadmap-item h4 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0 0 16px;
+}
+
+.roadmap-item ul {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.roadmap-item li {
+    font-size: 17px;
+    color: #4a5568;
+    margin-bottom: 8px;
+}
+
+/* Conclusion CTA */
+.conclusion-cta {
+    background: linear-gradient(135deg, var(--lapis-lazuli), var(--prussian-blue));
+    color: white;
+    border-radius: 24px;
+    padding: 60px 48px;
+    text-align: center;
+    margin: 60px 0;
+}
+
+.conclusion-cta h3 {
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 16px;
+}
+
+.conclusion-cta p {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.conclusion-cta .primary-button {
+    background: white;
+    color: var(--lapis-lazuli);
+}
+
+.conclusion-cta .primary-button:hover {
+    background: var(--seasalt);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.conclusion-cta .secondary-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: white;
+}
+
+.conclusion-cta .secondary-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* References */
+.references ol {
+    counter-reset: reference;
+    list-style: none;
+    padding-left: 0;
+}
+
+.references li {
+    counter-increment: reference;
+    padding-left: 40px;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a5568;
+    margin-bottom: 16px;
+}
+
+.references li::before {
+    content: "[" counter(reference) "]";
+    position: absolute;
+    left: 0;
+    font-weight: 600;
+    color: var(--lapis-lazuli);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1400px) {
+    .toc-sidebar {
+        left: 20px;
+        width: 220px;
+    }
+
+    .content-container {
+        padding: 0 280px 0 280px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .toc-sidebar {
+        display: none;
+    }
+
+    .content-container {
+        padding: 0 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .whitepaper-header h1 {
+        font-size: 40px;
+    }
+
+    .whitepaper-header .subtitle {
+        font-size: 20px;
+    }
+
+    .content-container {
+        padding: 0 24px;
+    }
+
+    .wp-section h2 {
+        font-size: 32px;
+    }
+
+    .wp-section h3 {
+        font-size: 24px;
+    }
+
+    .wp-section p,
+    .wp-section ul,
+    .wp-section ol {
+        font-size: 17px;
+    }
+
+    .trinity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .abstract-box {
+        padding: 24px;
+    }
+
+    .arch-layer {
+        padding: 24px;
+    }
+
+    .roadmap-item {
+        padding: 24px;
+    }
+
+    .conclusion-cta {
+        padding: 40px 24px;
+    }
+
+    .conclusion-cta h3 {
+        font-size: 28px;
+    }
+
+    .conclusion-cta p {
+        font-size: 18px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons a {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .whitepaper-header h1 {
+        font-size: 32px;
+    }
+
+    .whitepaper-header .subtitle {
+        font-size: 18px;
+    }
+
+    .trinity-inline {
+        gap: 12px;
+    }
+
+    .trinity-mini {
+        font-size: 24px;
+    }
+
+    .wp-section h2 {
+        font-size: 28px;
+    }
+
+    .wp-section h3 {
+        font-size: 22px;
+    }
+
+    .code-block {
+        padding: 16px;
+    }
+
+    .code-block pre {
+        font-size: 13px;
+    }
+
+    .use-case {
+        padding: 20px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .minimal-nav,
+    .toc-sidebar,
+    .footer-minimal,
+    .download-btn {
+        display: none !important;
+    }
+
+    .whitepaper-content {
+        padding: 0;
+    }
+
+    .content-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .wp-section {
+        page-break-inside: avoid;
+    }
+
+    .code-block {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .code-block pre,
+    .code-block code {
+        color: #000;
+    }
+}
