@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresenceNet Protocol - Technical Documentation</title>
+    <meta name="description" content="Technical documentation for the PresenceNet protocol: Marks, Trails, Rituals, and Vaults.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="protocol.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="protocol-page">
+    <!-- Navigation -->
+    <nav class="minimal-nav">
+        <div class="nav-brand">
+            <a href="/" aria-label="PresenceNet Home">
+                <img src="../assets/logo.png" alt="PresenceNet" class="brand-logo">
+            </a>
+        </div>
+        <div class="nav-trigger" id="navTrigger">
+            <div class="nav-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <a href="/">Home</a>
+            <a href="/about-presencenet">About</a>
+            <a href="/protocol">Protocol</a>
+            <a href="/whitepaper">Whitepaper</a>
+            <a href="https://veilachat.app">Veila</a>
+            <a href="https://thenextwaveapp.ca">Next Wave</a>
+        </div>
+    </nav>
+
+    <!-- Protocol Header -->
+    <header class="protocol-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="version-badge">v1.0 | Technical Specification</div>
+                <h1>PresenceNet Protocol</h1>
+                <p class="subtitle">Cryptographic Infrastructure for Human Conscious Experience</p>
+                <div class="protocol-trinity">
+                    <span class="trinity-glyph">🌊</span>
+                    <span class="trinity-text">Presence</span>
+                    <span class="trinity-glyph">☁️</span>
+                    <span class="trinity-text">Memory</span>
+                    <span class="trinity-glyph">⚡</span>
+                    <span class="trinity-text">Action</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Table of Contents Sidebar -->
+    <aside class="toc-sidebar">
+        <nav class="toc-nav">
+            <a href="#overview" class="toc-link">Overview</a>
+            <a href="#core-primitives" class="toc-link">Core Primitives</a>
+            <a href="#marks" class="toc-link">Marks</a>
+            <a href="#trails" class="toc-link">Trails</a>
+            <a href="#rituals" class="toc-link">Rituals</a>
+            <a href="#vaults" class="toc-link">Vaults</a>
+            <a href="#chambers" class="toc-link">Chambers</a>
+            <a href="#role-tags" class="toc-link">Role Tags</a>
+            <a href="#trust-geometry" class="toc-link">Trust Geometry</a>
+            <a href="#implementation" class="toc-link">Implementation</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="protocol-main">
+        <div class="content-container">
+
+            <!-- Overview -->
+            <section id="overview" class="protocol-section">
+                <h2>Protocol Overview</h2>
+                <div class="overview-box">
+                    <p>PresenceNet is a decentralized protocol built on the XRP Ledger (XRPL) that cryptographically proves human conscious experience. It defines presence mathematically as:</p>
+                    <div class="formula-box">
+                        <strong>Conscious Experience = Presence + Memory + Volitional Action</strong>
+                    </div>
+                    <p>This framework creates a verifiable boundary between human and artificial intelligence, enabling authentic digital coordination without surveillance or commodification.</p>
+                </div>
+
+                <div class="key-features">
+                    <div class="feature-card">
+                        <h3>🌊 Presence</h3>
+                        <p>Cryptographic proof of "I was here" through minimal blockchain transactions</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>☁️ Memory</h3>
+                        <p>Immutable, sovereign trails of your marks preserved eternally on-chain</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚡ Action</h3>
+                        <p>Volitional choice with stakes, enabling ritual-based coordination</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Primitives -->
+            <section id="core-primitives" class="protocol-section">
+                <h2>Core Primitives</h2>
+                <p>PresenceNet consists of five interoperable primitives that compose a complete system for verifying and coordinating human conscious experience:</p>
+
+                <div class="primitives-grid">
+                    <div class="primitive-card">
+                        <div class="primitive-icon">📍</div>
+                        <h3>Marks</h3>
+                        <p>Atomic units of presence. Signed, timestamped XRPL transactions (0.00001 XRP) proving "I was here."</p>
+                    </div>
+
+                    <div class="primitive-card">
+                        <div class="primitive-icon">🛤️</div>
+                        <h3>Trails</h3>
+                        <p>Append-only ledgers of marks tied to a $handle. Your sovereign, continuous narrative of presence.</p>
+                    </div>
+
+                    <div class="primitive-card">
+                        <div class="primitive-icon">🔮</div>
+                        <h3>Rituals</h3>
+                        <p>Structured coordination patterns defining when, how, and who can mark. The grammar of presence.</p>
+                    </div>
+
+                    <div class="primitive-card">
+                        <div class="primitive-icon">🏛️</div>
+                        <h3>Vaults</h3>
+                        <p>Multi-signature XRPL wallets governed by presence-based rules, not token ownership.</p>
+                    </div>
+
+                    <div class="primitive-card">
+                        <div class="primitive-icon">📦</div>
+                        <h3>Chambers</h3>
+                        <p>Sealed memory containers created by rituals, preserving symbolic content for participants.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Marks -->
+            <section id="marks" class="protocol-section">
+                <h2>Marks</h2>
+                <p>A Mark is the fundamental unit of presence in PresenceNet. Each mark is a cryptographically signed, timestamped transaction on the XRP Ledger that costs 0.00001 XRP.</p>
+
+                <h3>Mark Schema</h3>
+                <div class="code-block">
+<pre>{
+  "markId": "uuid-or-cid",
+  "version": "1.0",
+  "timestamp": "2025-01-15T18:00:00Z",
+  "witness": "$alice",
+  "markType": "ritual",
+  "note": "Completed Circle Ritual",
+  "ritual": {
+    "ritualId": "circle_2025",
+    "participants": ["$alice", "$bob", "$mira"],
+    "threshold": 3
+  },
+  "signature": "0xabc123..."
+}</pre>
+                </div>
+
+                <h3>Mark Types</h3>
+                <ul>
+                    <li><strong>Self Mark:</strong> Personal reflection or commitment, witnessed by $witness</li>
+                    <li><strong>Ritual Mark:</strong> Participation in a structured coordination pattern</li>
+                    <li><strong>Vault Mark:</strong> Signature for multi-sig vault operations</li>
+                    <li><strong>Public Mark:</strong> Openly witnessed presence at an event or moment</li>
+                </ul>
+
+                <h3>Properties</h3>
+                <ul>
+                    <li><strong>Minimal Cost:</strong> 0.00001 XRP ensures accessibility (1 billion marks = ~$100 in fees)</li>
+                    <li><strong>Cryptographically Verified:</strong> Ed25519 signatures ensure authenticity</li>
+                    <li><strong>Encrypted Memos:</strong> Optional AES-256 encrypted payloads for privacy</li>
+                    <li><strong>Immutable:</strong> Once on XRPL, marks cannot be altered or deleted</li>
+                </ul>
+            </section>
+
+            <!-- Trails -->
+            <section id="trails" class="protocol-section">
+                <h2>Trails</h2>
+                <p>A Trail is an append-only, sovereign ledger of all marks associated with a $handle. Trails form continuous narratives of presence, enabling identity to emerge through memory rather than external validation.</p>
+
+                <h3>Trail Properties</h3>
+                <ul>
+                    <li><strong>Private by Default:</strong> Only you control visibility of your trail</li>
+                    <li><strong>Portable:</strong> Trails can be exported and synced across applications</li>
+                    <li><strong>Verifiable:</strong> Cryptographic proofs enable selective disclosure</li>
+                    <li><strong>Weighted:</strong> Trail weight accumulates through ritual completions</li>
+                </ul>
+
+                <h3>Trail-Based Logic</h3>
+                <p>Rituals and Vaults use trail-based conditions to govern access:</p>
+                <div class="code-block">
+<pre>{
+  "required_trail_depth": 30,
+  "required_marks": ["ritual_presence", "vault_signature"],
+  "mark_recency_window": "30d",
+  "requires_completion_of": ["initiation_2025"],
+  "custom_boolean_expression": "trail_weight >= 100"
+}</pre>
+                </div>
+
+                <h3>Trail Indexing</h3>
+                <p>Trails are indexed for efficient querying while preserving privacy:</p>
+                <ul>
+                    <li><strong>On-Chain:</strong> Mark transactions stored on XRPL</li>
+                    <li><strong>Off-Chain Index:</strong> Metadata indexed in Firestore/IPFS</li>
+                    <li><strong>Encrypted Content:</strong> Memo payloads encrypted client-side</li>
+                    <li><strong>ZK-Proof Compatible:</strong> Future integration for trail verification without exposure</li>
+                </ul>
+            </section>
+
+            <!-- Rituals -->
+            <section id="rituals" class="protocol-section">
+                <h2>Rituals</h2>
+                <p>Rituals are structured coordination patterns that define how presence is verified and coordinated. They replace static rules with sacred, action-bound signals.</p>
+
+                <h3>Ritual Object Schema</h3>
+                <p>Each ritual is defined by a comprehensive schema covering identity, timing, participants, eligibility, and outcomes:</p>
+                <div class="code-block">
+<pre>{
+  "ritual_id": "circle_2025",
+  "ritual_version": "1.0",
+  "ritual_archetype": "circle",
+  "host_handle": "$mayowa",
+  "invited_handles": ["$alice", "$bob", "$mira"],
+  "start_time": "2025-06-01T18:00:00Z",
+  "end_time": "2025-06-01T20:00:00Z",
+  "required_mark_target": "$mayowa~presence",
+  "completion_condition": "minimum_marks: 3",
+  "linked_chamber": "vault:creativevault",
+  "biometric_required": false,
+  "recurring": false
+}</pre>
+                </div>
+
+                <h3>Ritual Archetypes</h3>
+                <div class="archetype-grid">
+                    <div class="archetype-card">
+                        <h4>Solo</h4>
+                        <p>Personal reflection, initiation, or commitment</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Pairwise</h4>
+                        <p>Mutual witness between two parties</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Circle</h4>
+                        <p>Time-bound collective presence</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Open</h4>
+                        <p>Public participation without coordination</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Chain</h4>
+                        <p>Sequential verification A → B → C</p>
+                    </div>
+                    <div class="archetype-card">
+                        <h4>Ripple</h4>
+                        <p>Network propagation with depth limits</p>
+                    </div>
+                </div>
+
+                <h3>Ritual Mechanics</h3>
+                <p>Rituals can exhibit transformative behaviors:</p>
+                <ul>
+                    <li><strong>Recursion:</strong> Auto-restart (e.g., weekly circle)</li>
+                    <li><strong>Mutation:</strong> Morph into another ritual upon completion</li>
+                    <li><strong>Replication:</strong> Spawn clones for new participants</li>
+                    <li><strong>Merge:</strong> Combine multiple rituals into one</li>
+                    <li><strong>Decay:</strong> Invalidate if not completed in time</li>
+                    <li><strong>Sealing:</strong> Lock after N completions</li>
+                </ul>
+
+                <h3>Example Rituals</h3>
+                <div class="ritual-examples">
+                    <div class="ritual-example">
+                        <h4>Witness Ritual</h4>
+                        <p>Mutual presence between two handles. Host marks participant, participant returns mark within 24h.</p>
+                    </div>
+                    <div class="ritual-example">
+                        <h4>Circle Ritual</h4>
+                        <p>Group coordination with minimum participation threshold. Unlocks chamber upon completion.</p>
+                    </div>
+                    <div class="ritual-example">
+                        <h4>Initiation Ritual</h4>
+                        <p>First mark to anchor a new trail. Biometric-verified self-mark via $witness.</p>
+                    </div>
+                    <div class="ritual-example">
+                        <h4>Guardian Ritual</h4>
+                        <p>Witness-required validation. Participant marks guardian; guardian must acknowledge.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vaults -->
+            <section id="vaults" class="protocol-section">
+                <h2>Vaults</h2>
+                <p>Vaults are multi-signature XRPL wallets governed by presence-based rules rather than token ownership. They integrate with rituals to enable dynamic, behavior-bound access control.</p>
+
+                <h3>Vault Integration Modes</h3>
+                <div class="vault-modes">
+                    <div class="vault-mode">
+                        <h4>Ritual-as-Key</h4>
+                        <p>Completing a ritual unlocks vault access</p>
+                        <div class="code-snippet">linked_chamber: "vault:treasury"</div>
+                    </div>
+                    <div class="vault-mode">
+                        <h4>Ritual-as-Signature</h4>
+                        <p>Ritual marks count as vault signatures</p>
+                        <div class="code-snippet">required_roles: ["•signer"]</div>
+                    </div>
+                    <div class="vault-mode">
+                        <h4>Ritual-as-Governor</h4>
+                        <p>Ritual outcomes update vault rules</p>
+                        <div class="code-snippet">vault_mode: "governance"</div>
+                    </div>
+                    <div class="vault-mode">
+                        <h4>Ritual-as-Condition</h4>
+                        <p>Vault locked until rituals completed</p>
+                        <div class="code-snippet">access_conditions: ["initiation_2025"]</div>
+                    </div>
+                </div>
+
+                <h3>Example: DAO Governance Vault</h3>
+                <div class="code-block">
+<pre>{
+  "vault_id": "dao_treasury",
+  "signers": ["$alice", "$bob", "$mira"],
+  "threshold": "2/3",
+  "governance_ritual": "circle_of_consensus_2025",
+  "role_requirements": {
+    "•signer": {
+      "grant_condition": "trail_weight >= 100",
+      "issuance": "ritual-issued"
+    }
+  }
+}</pre>
+                </div>
+                <p>In this setup, ritual completion grants •signer tags dynamically. Only those with active tags can sign vault transactions.</p>
+            </section>
+
+            <!-- Chambers -->
+            <section id="chambers" class="protocol-section">
+                <h2>Chambers</h2>
+                <p>Chambers are sealed memory containers created by advanced rituals. They preserve symbolic content (text, media, NFTs) accessible only to participants who completed the ritual.</p>
+
+                <h3>Chamber Properties</h3>
+                <ul>
+                    <li><strong>Private:</strong> Only ritual participants can access</li>
+                    <li><strong>Immutable:</strong> Content cannot be altered after sealing</li>
+                    <li><strong>Trail-Gated:</strong> Access requires proof of ritual completion in trail</li>
+                    <li><strong>Eternal:</strong> Stored on IPFS/Arweave for permanence</li>
+                </ul>
+
+                <h3>Use Cases</h3>
+                <div class="chamber-uses">
+                    <div class="chamber-use">
+                        <h4>Family Memory</h4>
+                        <p>Multi-generational ritual creates chamber with photos, letters, and stories for descendants</p>
+                    </div>
+                    <div class="chamber-use">
+                        <h4>Community Archive</h4>
+                        <p>Group ritual seals shared experiences, accessible to all participants</p>
+                    </div>
+                    <div class="chamber-use">
+                        <h4>Time Capsule</h4>
+                        <p>Delayed-reveal ritual unlocks chamber at future date</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Role Tags -->
+            <section id="role-tags" class="protocol-section">
+                <h2>Role Tags (•tag)</h2>
+                <p>Role Tags are cryptographically verifiable, temporary roles for vaults, DAOs, and rituals. They replace static permissions with sovereign, action-bound signals.</p>
+
+                <h3>Tag Properties</h3>
+                <ul>
+                    <li><strong>Optional:</strong> Self-claimed or ritual-issued; no defaults</li>
+                    <li><strong>Temporary:</strong> Burned after expiry or ritual completion</li>
+                    <li><strong>Contextual:</strong> Valid only in specific vault/ritual scope</li>
+                    <li><strong>Revocable:</strong> Auto-burned if revocation conditions met</li>
+                    <li><strong>Composable:</strong> Stack with ~suffix (e.g., $alice~delegate•voter)</li>
+                </ul>
+
+                <h3>Tag Schema</h3>
+                <div class="code-block">
+<pre>{
+  "roles": {
+    "•signer": {
+      "threshold": "3/5",
+      "grant_condition": "trail_marks >= 100",
+      "issuance": "self-claimed",
+      "expiry": "30d"
+    },
+    "•voter": {
+      "grant_condition": "ritual:governance_complete",
+      "issuance": "ritual-issued",
+      "revoke_conditions": {
+        "•banned": "hostile_marks >= 3"
+      }
+    }
+  }
+}</pre>
+                </div>
+
+                <h3>Tag Lifecycle</h3>
+                <ol>
+                    <li><strong>Grant:</strong> Earned via trail depth, ritual completion, or self-claim</li>
+                    <li><strong>Use:</strong> Tag enables vault signatures, voting, or access</li>
+                    <li><strong>Revoke:</strong> Expired, ritual-triggered, or consensus-based removal</li>
+                    <li><strong>Burn:</strong> Tag destroyed on-chain, recorded in trail</li>
+                </ol>
+            </section>
+
+            <!-- Trust Geometry -->
+            <section id="trust-geometry" class="protocol-section">
+                <h2>Trust Geometry</h2>
+                <p>PresenceNet's cryptographic architecture mirrors the natural geometry of human trust relationships. Rather than forcing relationships through digital abstractions, we build tools that respect covenant formation.</p>
+
+                <h3>Three Trust Geometries</h3>
+                <div class="geometry-grid">
+                    <div class="geometry-card">
+                        <h4>Point (Individual)</h4>
+                        <p><strong>Structure:</strong> Self-contained, complete unto itself</p>
+                        <p><strong>Cryptography:</strong> Personal key derivation (only self can decrypt)</p>
+                        <p><strong>Example:</strong> "I commit to daily practice"</p>
+                    </div>
+                    <div class="geometry-card">
+                        <h4>Line (Bilateral)</h4>
+                        <p><strong>Structure:</strong> Two entities connected by direct relationship</p>
+                        <p><strong>Cryptography:</strong> ECDH shared secrets (both parties decrypt)</p>
+                        <p><strong>Example:</strong> "Thank you for your support"</p>
+                    </div>
+                    <div class="geometry-card">
+                        <h4>Network (Collective)</h4>
+                        <p><strong>Structure:</strong> Multiple entities with shared center</p>
+                        <p><strong>Cryptography:</strong> Group key distribution (all participants decrypt)</p>
+                        <p><strong>Example:</strong> "Completed ritual step 3"</p>
+                    </div>
+                </div>
+
+                <h3>Covenant vs Contract</h3>
+                <p>A <strong>covenant</strong> is a voluntary act of alignment carrying moral or sacred significance. Unlike contracts (enforced externally), covenants are honored internally. PresenceNet encodes the geometry of trust in a way that respects human relationships.</p>
+
+                <blockquote>
+                    "This is the first cryptographic system where the mathematical structure of encryption directly mirrors the mathematical structure of human trust relationships."
+                </blockquote>
+            </section>
+
+            <!-- Implementation -->
+            <section id="implementation" class="protocol-section">
+                <h2>Implementation Guide</h2>
+                <p>PresenceNet is built on the XRP Ledger with additional infrastructure for trails, rituals, and chambers.</p>
+
+                <h3>Technical Stack</h3>
+                <ul>
+                    <li><strong>Blockchain:</strong> XRP Ledger (XRPL) for mark transactions</li>
+                    <li><strong>Storage:</strong> IPFS/Arweave for chambers and trail archival</li>
+                    <li><strong>Indexing:</strong> Firestore for trail metadata and ritual state</li>
+                    <li><strong>Encryption:</strong> AES-256 for memos, Ed25519 for signatures</li>
+                    <li><strong>SDK:</strong> JavaScript, Dart, Rust implementations</li>
+                </ul>
+
+                <h3>Developer Quickstart</h3>
+                <div class="code-block">
+<pre>// Define a ritual
+const ritual = {
+  ritual_id: "starter_circle_2025",
+  ritual_archetype: "circle",
+  host_handle: "$dev",
+  participant_handles: ["$alice", "$bob"],
+  start_time: "2025-06-01T10:00:00Z",
+  end_time: "2025-06-01T12:00:00Z",
+  required_mark_target: "$dev~presence",
+  completion_condition: "minimum_marks: 2"
+}
+
+// Submit to PresenceNet
+await createRitual(ritual)
+
+// Submit a mark
+await submitMark({
+  from: "$alice",
+  to: "$dev~presence",
+  ritual_id: "starter_circle_2025"
+})
+
+// Check trail
+const trail = await checkTrail("$alice")
+console.log(trail.weight) // Trail weight</pre>
+                </div>
+
+                <h3>Privacy Architecture</h3>
+                <ul>
+                    <li><strong>Encrypted by Default:</strong> Mark memos use AES-256 encryption</li>
+                    <li><strong>Proxy Routing:</strong> $handle-to-$handle transactions route through proxies</li>
+                    <li><strong>Mutual Contacts:</strong> Rituals restrict access to verified $handles</li>
+                    <li><strong>ZK-Proof Compatible:</strong> Future integration for trail verification without exposure</li>
+                </ul>
+
+                <h3>Resources</h3>
+                <div class="resources-grid">
+                    <a href="https://github.com/presencenet" class="resource-card">
+                        <h4>GitHub</h4>
+                        <p>Protocol implementation and SDKs</p>
+                    </a>
+                    <a href="/whitepaper" class="resource-card">
+                        <h4>Whitepaper</h4>
+                        <p>Complete technical specification</p>
+                    </a>
+                    <a href="https://thenextwaveapp.ca" class="resource-card">
+                        <h4>Next Wave</h4>
+                        <p>Reference implementation app</p>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-minimal">
+        <div class="footer-content">
+            <div class="footer-newsletter">
+                <h4>Protocol Updates</h4>
+                <p>Receive technical releases and specification updates</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="input-group">
+                        <input type="email" placeholder="Enter your email" required id="emailInput">
+                        <button type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="footer-nav">
+                <div class="nav-column">
+                    <h5>Protocol</h5>
+                    <a href="/whitepaper">Whitepaper</a>
+                    <a href="/protocol">Documentation</a>
+                    <a href="/developers">Developers</a>
+                </div>
+                <div class="nav-column">
+                    <h5>Ecosystem</h5>
+                    <a href="https://veilachat.app">Veila</a>
+                    <a href="https://thenextwaveapp.ca">Next Wave</a>
+                    <a href="/souldns">Soul DNS</a>
+                </div>
+                <div class="nav-column">
+                    <h5>Community</h5>
+                    <a href="/about-presencenet">About</a>
+                    <a href="https://github.com/presencenet">GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 PresenceNet. Digital souls are sovereign.</p>
+            <div class="social-links">
+                <a href="https://instagram.com/presencenet" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/presencenet" aria-label="X (Twitter)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/company/presencenet" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="protocol.js"></script>
+</body>
+</html>

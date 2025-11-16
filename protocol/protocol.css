@@ -1,0 +1,577 @@
+/* PresenceNet Protocol Page Styles */
+
+/* ===== PROTOCOL PAGE LAYOUT ===== */
+.protocol-page {
+    background: var(--seasalt);
+    padding-top: 80px;
+}
+
+/* Protocol Header */
+.protocol-header {
+    background: linear-gradient(135deg, var(--prussian-blue) 0%, var(--lapis-lazuli) 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.protocol-header .header-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.version-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+}
+
+.protocol-header h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.1;
+}
+
+.protocol-header .subtitle {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.protocol-trinity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 18px;
+}
+
+.trinity-glyph {
+    font-size: 32px;
+}
+
+.trinity-text {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Main Content */
+.protocol-main {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+/* Sections */
+.protocol-section {
+    margin-bottom: 80px;
+}
+
+.protocol-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid var(--lapis-lazuli);
+}
+
+.protocol-section h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+.protocol-section h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--lapis-lazuli);
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.protocol-section p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #4a5568;
+    margin-bottom: 20px;
+}
+
+.protocol-section ul, .protocol-section ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+}
+
+.protocol-section li {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #4a5568;
+    margin-bottom: 12px;
+}
+
+.protocol-section li strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+/* Overview Box */
+.overview-box {
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    border-left: 4px solid var(--lapis-lazuli);
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.formula-box {
+    background: var(--alice-blue);
+    padding: 24px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 24px 0;
+    font-size: 18px;
+    color: var(--prussian-blue);
+}
+
+/* Key Features Grid */
+.key-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.feature-card p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: #4a5568;
+}
+
+/* Primitives Grid */
+.primitives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.primitive-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primitive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.primitive-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.primitive-card h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.primitive-card p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Code Blocks */
+.code-block {
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+.code-snippet {
+    display: inline-block;
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* Archetype Grid */
+.archetype-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+}
+
+.archetype-card {
+    background: var(--alice-blue);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--lapis-lazuli);
+}
+
+.archetype-card h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--prussian-blue);
+}
+
+.archetype-card p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Ritual Examples */
+.ritual-examples {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.ritual-example {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    border-left: 4px solid var(--lapis-lazuli);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.ritual-example h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.ritual-example p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Vault Modes */
+.vault-modes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.vault-mode {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.vault-mode h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.vault-mode p {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+/* Chamber Uses */
+.chamber-uses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.chamber-use {
+    background: var(--alice-blue);
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.chamber-use h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.chamber-use p {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/* Geometry Grid */
+.geometry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.geometry-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.geometry-card h4 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--prussian-blue);
+    font-size: 20px;
+}
+
+.geometry-card p {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.geometry-card p strong {
+    display: block;
+    color: var(--lapis-lazuli);
+    margin-bottom: 4px;
+}
+
+/* Resources Grid */
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.resource-card {
+    background: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.resource-card h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--prussian-blue);
+}
+
+.resource-card p {
+    font-size: 15px;
+    margin-bottom: 0;
+    color: #4a5568;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid var(--lapis-lazuli);
+    padding-left: 24px;
+    margin: 32px 0;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--charcoal);
+}
+
+/* Table of Contents Sidebar */
+.toc-sidebar {
+    position: fixed;
+    left: 40px;
+    top: 120px;
+    width: 240px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.toc-link {
+    display: block;
+    padding: 10px 16px;
+    color: var(--charcoal);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.toc-link:hover {
+    background: var(--alice-blue);
+    color: var(--lapis-lazuli);
+}
+
+.toc-link.active {
+    background: var(--lapis-lazuli);
+    color: white;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1400px) {
+    .toc-sidebar {
+        left: 20px;
+        width: 220px;
+    }
+
+    .content-container {
+        padding: 60px 40px;
+        margin-left: 280px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .toc-sidebar {
+        display: none;
+    }
+
+    .content-container {
+        padding: 60px 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 968px) {
+    .protocol-header h1 {
+        font-size: 42px;
+    }
+
+    .protocol-header .subtitle {
+        font-size: 18px;
+    }
+
+    .protocol-trinity {
+        font-size: 16px;
+    }
+
+    .trinity-glyph {
+        font-size: 28px;
+    }
+
+    .content-container {
+        padding: 40px 24px;
+    }
+
+    .protocol-section h2 {
+        font-size: 30px;
+    }
+
+    .protocol-section h3 {
+        font-size: 22px;
+    }
+
+    .key-features,
+    .primitives-grid,
+    .archetype-grid,
+    .vault-modes,
+    .geometry-grid,
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ritual-examples,
+    .chamber-uses {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .protocol-header h1 {
+        font-size: 32px;
+    }
+
+    .protocol-header .subtitle {
+        font-size: 16px;
+    }
+
+    .content-container {
+        padding: 32px 20px;
+    }
+
+    .protocol-section h2 {
+        font-size: 26px;
+    }
+
+    .protocol-section h3 {
+        font-size: 20px;
+    }
+
+    .overview-box,
+    .feature-card,
+    .primitive-card,
+    .vault-mode,
+    .geometry-card,
+    .resource-card {
+        padding: 20px;
+    }
+
+    .code-block {
+        padding: 16px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,17 @@
+﻿The Covenant Terms:
+Article I - Presence Rights:
+* Presence is voluntary and cannot be coerced
+* Silence is respected as a valid choice
+* Marking requires conscious intent and cryptographic proof
+Article II - Memory Rights:
+* Memory belongs to the soul who created it
+* Trails are exportable and portable
+* No platform can hold memory hostage
+Article III - Coordination Rights:
+* Coordination happens through witnessed presence
+* No algorithm manipulates participation
+* Rituals and vaults operate on consent, not coercion
+Article IV - Sovereignty Rights:
+* Each soul controls their own keys and data
+* No central authority can revoke digital identity
+* Constitutional protections are enforced by code

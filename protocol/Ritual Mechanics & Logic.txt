@@ -1,0 +1,237 @@
+﻿________________
+
+
+🧭 WHAT IS A RITUAL MECHANIC?
+A ritual mechanic is a non-user-facing rule layer that governs how rituals behave, transform, replicate, or dissolve.
+These are not templates — they are protocol logic you can apply to any ritual.
+________________
+
+
+⚙️ LEVEL 3 — PRESENCENET RITUAL MECHANICS
+1. 
+Recursion
+A ritual may be configured to automatically restart upon completion.
+* Used for: habits, spiritual devotion, repeating presence
+
+* Examples:
+
+   * “Mark every Sunday at 6pm”
+
+   * “Loop this Witness Ritual 7 times for a larger Completion Mark”
+
+      * Field: recurring: true, interval: 7d
+
+________________
+
+
+2. 
+Mutation
+A ritual may change form after completion — evolving its structure.
+         * Used for: questlines, developmental paths
+
+         * Examples:
+
+            * “Complete Guardian → becomes Split Ritual”
+
+            * “Complete three Circles → unlock a unique Vault”
+
+               * Field: on_completion_morph: [ritual_id]
+
+________________
+
+
+3. 
+Delegation
+The right to complete a ritual may be passed to another user.
+                  * Used for: guardianship, legacy planning, group hierarchies
+
+                  * Example:
+
+                     * “This Time Capsule can only be opened by $mayo’s assigned heir”
+
+                        * Field: completion_delegate: $handle
+
+________________
+
+
+4. 
+Replication
+A completed ritual may spawn clones of itself for others to walk.
+                           * Used for: viral rituals, movement-building
+
+                           * Example:
+
+                              * “Mark this and automatically start a personal copy for your circle”
+
+                                 * Field: replicates_on_completion: true
+
+________________
+
+
+5. 
+Merge
+Two or more rituals may merge into one unified memory or trail action.
+                                    * Used for: shared ceremonies, trail synthesis
+
+                                    * Example:
+
+                                       * “If Ritual A and Ritual B are completed in the same day, create Ritual C”
+
+                                          * Field: merge_trigger: [ritual_ids]
+
+________________
+
+
+6. 
+Decay
+Rituals can be invalidated if not completed in a certain timeframe — presence fades.
+                                             * Used for: urgency, impermanence
+
+                                             * Example:
+
+                                                * “This ritual decays 48 hours after it’s started”
+
+                                                   * Field: decay_after: 48h, on_decay: log trail as ‘faded’
+
+________________
+
+
+7. 
+Reversal
+A ritual’s effects can be undone, but only through presence.
+                                                      * Used for: forgiveness, healing, reversal of status
+
+                                                      * Example:
+
+                                                         * “To exit the Vault, complete a Solitude Ritual with a mirror Mark”
+
+                                                            * Field: requires_reversal_path: true
+
+________________
+
+
+8. 
+Weighting
+Rituals can accumulate weight in a user’s trail — used for symbolic governance or progression.
+                                                               * Each ritual completion may have a ritual_weight (e.g., 1–100)
+
+                                                               * Trails with cumulative weight above X unlock inner rituals, Vaults, or roles
+
+                                                               * This forms a presence-based merit system without reputation
+
+________________
+
+
+9. 
+Latency
+Rituals may have delayed completion, even after the last Mark.
+                                                                  * Used for: suspense, reflection, time anchors
+
+                                                                  * Example:
+
+                                                                     * “This Memorial completes 7 days after the final mark”
+
+                                                                        * Field: delayed_completion: true, delay_duration: 7d
+
+________________
+
+
+10. 
+Sealing
+A ritual may self-destruct or lock forever once completed a certain number of times.
+                                                                           * Used for: rare rituals, one-time coordination
+
+                                                                           * Example:
+
+                                                                              * “This Genesis Ritual may only be completed 14 times”
+
+                                                                                 * Field: max_completions: 14, auto_seal: true
+
+________________
+
+
+These 10 mechanics form the core ritual logic engine of PresenceNet.
+Any ritual template can be modified by these mechanics.
+They are the verbs behind the ritual nouns.
+________________
+
+
+Would you like me to now define these formally as the PresenceNet Ritual Mechanics Layer v1, alongside the template kit?
+Yes — and that distinction is crucial to the architecture of PresenceNet.
+Let’s define the difference clearly:
+________________
+
+
+🧩 
+Ritual Mechanics
+ = 
+How
+ a ritual behaves
+These control the life cycle, flow, or transformation of a ritual over time.
+They affect the system-level behavior, not who can access it.
+Examples:
+                                                                                    * Recursion (auto-repeats)
+
+                                                                                    * Mutation (ritual evolves into another)
+
+                                                                                    * Delegation (completion rights can be transferred)
+
+                                                                                    * Decay (ritual expires if not completed)
+
+                                                                                    * Merge (rituals fuse into one)
+
+                                                                                    * Replication (ritual spawns copies)
+
+                                                                                    * Latency (completion is delayed)
+
+                                                                                    * Sealing (ritual locks forever after N completions)
+
+Think: Behavior modifiers. Lifecycle rules.
+________________
+
+
+⚙️ 
+Ritual Logic
+ = 
+Who can do it and when
+These define conditions of participation and access requirements.
+They determine who is allowed to enter or complete the ritual, based on their trail, biometrics, past rituals, or other logical factors.
+Examples:
+                                                                                       * requiredMarks — must have certain trail entries
+
+                                                                                       * requiredTrailDepth — must have N past marks
+
+                                                                                       * requiresBiometricFlag — must use biometric
+
+                                                                                       * requiresWitnessMark — must be marked by X
+
+                                                                                       * requiresCompletionOf — must have completed ritual Y
+
+                                                                                       * customBooleanExpression — advanced access logic
+
+Think: Eligibility logic. Gatekeeping with sacred memory.
+________________
+
+
+🔁 How They Work Together:
+Let’s say you have a Time Capsule Ritual.
+                                                                                          * Mechanics control:
+
+                                                                                             * How it locks/unlocks (latency, sealing, replication)
+
+                                                                                             * Whether it auto-renews annually (recursion)
+
+                                                                                                * Logic controls:
+
+                                                                                                   * Who can contribute to it (requiredMarks, biometricRequired)
+
+                                                                                                   * Who can open it (requiresWitnessMark, trailDepth ≥ 30)
+
+                                                                                                   * Whether only verified elders can unlock it
+
+This layered system gives you:
+                                                                                                      * Complete control over flow
+
+                                                                                                      * Precise control over access
+
+                                                                                                      * And a sacred, programmable presence environment that is more expressive than smart contracts

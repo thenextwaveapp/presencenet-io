@@ -168,21 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // ===== EXTERNAL LINK HANDLING =====
+    // External links open in new tab
     const externalLinks = document.querySelectorAll('a[href^="http"]');
-
     externalLinks.forEach(link => {
-        // Add external link indicator
         if (!link.hostname.includes('presencenet')) {
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');
-
-            // Add external link icon
-            const icon = document.createElement('span');
-            icon.innerHTML = ' ↗';
-            icon.style.fontSize = '0.8em';
-            icon.style.opacity = '0.6';
-            link.appendChild(icon);
         }
     });
 

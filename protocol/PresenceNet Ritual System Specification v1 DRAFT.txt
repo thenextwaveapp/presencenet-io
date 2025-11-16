@@ -1,0 +1,1807 @@
+﻿PresenceNet Ritual System Specification v1.0
+Version: v1.0
+Author: $mayowa
+Steward: PresenceNet Foundation (Provisional)
+Status: Draft
+License: CC BY-NC-SA 4.0
+________________
+
+
+1. Purpose
+PresenceNet rituals are cryptographically verified, presence-driven interactions that enable sovereign coordination, memory, and governance in decentralized communities. Rituals replace static rules with sacred, action-bound signals, fostering intentional participation through verified presence. They govern access to vaults, issue roles, and create shared memories, forming the heartbeat of PresenceNet.
+Rituals are:
+* Time-bound: Defined by windows of action.
+* Trail-verified: Tied to participants’ on-chain histories.
+* Mechanically alive: Governed by adaptive rules that evolve, replicate, or dissolve.
+This specification defines the Ritual Object Schema, Ritual Templates, Mechanics, Logic, Coordination Flow, and Vault Integration, providing a flexible grammar for digital societies, ceremonies, and governance.
+________________
+
+
+2. Definitions
+* Ritual: A structured process of verified presence (e.g., marking a subhandle) that results in a Completion Mark.
+* Trail: A verifiable record of a participant’s actions and marks on the XRPL ledger.
+* Mark: A signed, timestamped entry (e.g., role_claim, ritual_presence) proving participation.
+* Vault: A multi-signature XRPL wallet governed by presence-based rules.
+* Chamber: A gated resource or symbolic space (e.g., vault, NFT, social action) unlocked by ritual completion.
+* Role Tag (•tag): A temporary, cryptographically verified role (e.g., •signer) often granted via rituals.
+________________
+
+
+3. Ritual Object Schema (v1.0)
+Each Ritual Object defines how a ritual behaves, who can participate, and what happens upon completion. Fields are grouped into categories for clarity.
+3.1 Identity & Metadata
+Field
+	Type
+	Description
+	ritual_id
+	string
+	Unique identifier (e.g., circle_2025).
+	ritual_version
+	string
+	Semantic version (e.g., "1.0").
+	ritual_archetype
+	string
+	Categorical type (e.g., "solo", "circle").
+	ritual_theme
+	object
+	Optional styling: { name, color, icon }.
+	completion_memo_template
+	string
+	Text for trail/completion mark.
+	memory_archive_target
+	string
+	IPFS/Arweave/URI to archive completion state.
+	completion_broadcast_targets
+	array
+	Where to publish result (e.g., ["markwall", "vault"]).
+	3.2 Timing & Coordination
+Field
+	Type
+	Description
+	start_time
+	timestamp
+	Ritual start (ISO 8601).
+	end_time
+	timestamp
+	Ritual end (ISO 8601).
+	ritual_window
+	string
+	Alternative to start/end for compact rituals.
+	recurring
+	boolean
+	If true, ritual auto-restarts.
+	interval
+	string
+	Time between recurrences (e.g., "7d").
+	completion_delay
+	string
+	Delay before completion mark (e.g., "7d").
+	grace_period
+	string
+	Window after expiry for actions (e.g., "24h").
+	reflection_window
+	string
+	Time for mark editing or journaling.
+	unlock_schedule
+	object
+	Maps phases to time delays or ritual triggers.
+	3.3 Participants & Access
+Field
+	Type
+	Description
+	host_handle
+	string
+	Ritual creator or lead.
+	invited_handles
+	array
+	Explicit participant list.
+	participant_handles
+	array/null
+	Optional; null means open.
+	max_participants
+	integer
+	Optional participation cap.
+	allow_mid_ritual_entry
+	boolean
+	If false, only early entry allowed.
+	visibility_scope
+	string
+	"public", "invitees", "participants", "creator-only".
+	participant_roles
+	object
+	Assign roles to handles.
+	3.4 Eligibility & Trail Logic
+Field
+	Type
+	Description
+	required_marks
+	array
+	Types of marks required in trail.
+	required_trail_depth
+	integer
+	Minimum number of past marks.
+	mark_recency_window
+	string
+	Must have recent trail activity.
+	requires_completion_of
+	array
+	List of required past rituals.
+	requires_witness_mark
+	string
+	Must be marked by a specific handle.
+	custom_boolean_expression
+	string
+	Advanced logic (e.g., trail_weight ≥ 50).
+	biometric_required
+	boolean
+	Require biometric signal.
+	geolocation_required
+	boolean
+	Require presence at a place.
+	geofence
+	object
+	{ lat, lon, radius_meters }.
+	3.5 Marking Behavior
+Field
+	Type
+	Description
+	required_mark_target
+	string
+	Who/what to mark (e.g., $host~presence).
+	mark_payload_schema
+	object
+	Enforces structure on mark data.
+	memo_allowed
+	boolean
+	Whether custom memos are allowed.
+	delayed_completion
+	boolean
+	If true, uses completion_delay.
+	acknowledgement_method
+	string
+	E.g., "return_mark", "null", "auto".
+	3.6 Chambers & Vaults
+Field
+	Type
+	Description
+	linked_chamber
+	string
+	Vault or object unlocked upon completion.
+	unlock_target
+	string
+	Vault or object being unlocked.
+	access_conditions
+	array
+	Trail/ritual logic required to enter chamber.
+	vault_mode
+	string
+	"symbolic", "funds", "content".
+	3.7 Ritual Mechanics (Transformative Behavior)
+Field
+	Type
+	Description
+	on_completion_morph
+	array
+	Next rituals to trigger after this one ends.
+	replicates_on_completion
+	boolean
+	Creates clone rituals for new users.
+	merge_trigger
+	array
+	List of ritual_ids required to merge into a new one.
+	decay_after
+	string
+	Ritual dies if not completed in X time.
+	on_decay
+	string
+	Result status if decayed (e.g., "faded").
+	requires_reversal_path
+	boolean
+	Whether this ritual can be undone.
+	ritual_weight
+	integer
+	Adds numeric weight to trail.
+	sealing / auto_seal
+	boolean
+	true = no further completions allowed.
+	max_completions
+	integer
+	Hard cap on completions.
+	3.8 Developer-Oriented Flags
+Field
+	Type
+	Description
+	creator_signature_required
+	boolean
+	Only finalize if creator signs off.
+	ritual_state_mutability
+	boolean
+	If false, ritual cannot be changed after creation.
+	________________
+
+
+4. Ritual Coordination Flow (Closed Ritual)
+4.1 Creation (Ritual Definition)
+The creator defines a Ritual Object (per the schema):
+{
+  "ritual_id": "circle_2025",
+  "ritual_version": "1.0",
+  "ritual_archetype": "circle",
+  "host_handle": "$mayowa",
+  "start_time": "2025-05-10T18:00:00Z",
+  "end_time": "2025-05-10T20:00:00Z",
+  "invited_handles": ["$alice", "$bob", "$mira"],
+  "required_mark_target": "$mayowa~presence",
+  "completion_condition": "minimum_marks: 3",
+  "linked_chamber": "vault:creativevault",
+  "visibility_scope": "participants"
+}
+
+
+* Stored on-chain or in a decentralized state layer.
+4.2 Invitation & Acceptance
+* Invited participants (invited_handles) receive metadata and must accept before start_time.
+* Upon acceptance, instructions are displayed:
+“Mark $mayowa~presence between 2025-05-10T18:00:00Z and 2025-05-10T20:00:00Z.”
+4.3 Marking (Witness Phase)
+   * Participants submit a signed mark to the required_mark_target within the ritual_window.
+   * Marks include proof of presence (e.g., biometric_required, geolocation_required) and are timestamped.
+4.4 Completion Mark (Verification & Sealing)
+   * The creator or system verifies marks against completion_condition.
+A Completion Mark is issued:
+{
+  "ritual_id": "circle_2025",
+  "completion_timestamp": "2025-05-10T19:30:00Z",
+  "metadata": {"participants": 3}
+}
+   *    * Optionally published to completion_broadcast_targets.
+4.5 Chamber Access (Optional)
+   * Completion unlocks the linked_chamber (e.g., vault:creativevault).
+   * Chambers may be vaults, symbolic objects (e.g., NFTs), or social actions (e.g., voting rights).
+________________
+
+
+5. Ritual Mechanics
+Ritual Mechanics govern how rituals behave, transform, or dissolve, as defined in the Ritual Object schema (Section 3.7). Examples include:
+Mechanic
+	Description
+	Recursion
+	Ritual auto-restarts (e.g., “Mark every Sunday at 6pm”).
+	Mutation
+	Ritual evolves into another (e.g., Guardian → Split Ritual).
+	Delegation
+	Completion rights transferable (e.g., Time Capsule heir).
+	Replication
+	Spawns clones for others (e.g., viral rituals).
+	Merge
+	Merges rituals into one (e.g., Ritual A + B → C).
+	Decay
+	Invalidates if not completed in time (e.g., 48h decay).
+	Reversal
+	Effects undone via another ritual (e.g., Solitude to exit vault).
+	Weighting
+	Adds weight to trail (e.g., unlocks roles at trail_weight ≥ 100).
+	Latency
+	Delays completion (e.g., Memorial completes 7 days after final mark).
+	Sealing
+	Locks after N completions (e.g., Genesis Ritual seals after 14).
+	________________
+
+
+6. Ritual Logic
+Ritual Logic defines who can participate and when, enforced via eligibility conditions in the Ritual Object (Section 3.4).
+Condition
+	Description
+	Required Marks
+	Must have specific trail entries.
+	Trail Depth
+	Must have N past marks.
+	Biometric Flag
+	Requires biometric verification.
+	Witness Mark
+	Must be marked by a specific handle.
+	Prior Ritual
+	Must have completed specific rituals.
+	Custom Expression
+	Advanced access logic (e.g., trail_weight ≥ 50).
+	________________
+
+
+7. Ritual → Vault Integration
+Rituals govern XRPL vaults through five modes (Section 3.6):
+Mode
+	Description
+	Example Use Case
+	Ritual-as-Key
+	Unlocks vault upon completion (linked_chamber).
+	Circle Ritual → $creativevault.
+	Ritual-as-Signature
+	Marks count as vault signatures for proposals.
+	Mentors mark → vault fund release.
+	Ritual-as-Condition
+	Vault locked until rituals completed (access_conditions).
+	Vault of Ancients → Initiation + Guardian.
+	Ritual-as-Artifact
+	Writes memory into vault trail (e.g., reflections).
+	Solitude Ritual → vault_journal.
+	Ritual-as-Governor
+	Vault rules change via ritual (e.g., threshold adjustment).
+	Circle of Consensus → update threshold.
+	________________
+
+
+8. Ritual Template Kit v1.0
+8.1 Foundational 5 Rituals
+Witness Ritual
+   * Type: Pairwise, Coordinated Presence
+   * Purpose: Verifiable mutual presence between two handles.
+Ritual Object:
+{
+  "ritual_id": "witness_2025",
+  "ritual_archetype": "pairwise",
+  "host_handle": "$mayowa",
+  "participant_handles": ["$alice"],
+  "ritual_window": "24h",
+  "acknowledgement_method": "return_mark",
+  "biometric_required": false
+}
+   *    * Completion Condition: Host marks participant, participant returns mark within window.
+   * Result: Both receive Completion Mark; trail logs outgoing, incoming, and completion marks.
+   * Notes: Presence-based; ideal for social or ceremonial contexts.
+Initiation Ritual
+   * Type: Solo, Onboarding
+   * Purpose: Anchor a new trail with a sacred first mark.
+Ritual Object:
+{
+  "ritual_id": "initiation_2025",
+  "ritual_archetype": "solo",
+  "participant_handles": ["$newuser"],
+  "host_handle": "$witness",
+  "biometric_required": true
+}
+   *    * Completion Condition: Self-mark via $witness, optionally biometric-verified.
+   * Result: Completion Mark issued; trail begins, may unlock vault.
+   * Notes: Symbolic first step; no return mark needed.
+Circle Ritual
+   * Type: Group Coordination
+   * Purpose: Time-bound collective presence.
+Ritual Object:
+{
+  "ritual_id": "circle_2025",
+  "ritual_archetype": "circle",
+  "host_handle": "$mayowa",
+  "invited_handles": ["$alice", "$bob", "$mira"],
+  "start_time": "2025-06-01T18:00:00Z",
+  "end_time": "2025-06-01T20:00:00Z",
+  "required_mark_target": "$mayowa~presence",
+  "completion_condition": "minimum_marks: 3",
+  "linked_chamber": "vault:creativevault"
+}
+   *    * Completion Condition: Minimum marks to host within window.
+   * Result: Completion Mark for qualifying participants; host receives summary.
+   * Notes: Ideal for meetups, prayer circles; creates group memory.
+Memorial Ritual
+   * Type: Open, Asynchronous
+   * Purpose: Honor a moment or person without coordination.
+Ritual Object:
+{
+  "ritual_id": "memorial_2025",
+  "ritual_archetype": "open",
+  "host_handle": "$mayowa",
+  "participant_handles": null,
+  "ritual_window": "indefinite",
+  "biometric_required": false,
+  "visibility_scope": "public"
+}
+   *    * Completion Condition: Marks sent to host or symbolic vault; no completion required.
+   * Result: Marks stand as remembrance; trail logs memorial presence.
+   * Notes: One-way act for anniversaries, grief; host may publish summary.
+Unlock Ritual
+   * Type: Conditional Access
+   * Purpose: Unlock vaults or symbolic layers via verified presence.
+Ritual Object:
+{
+  "ritual_id": "unlock_2025",
+  "ritual_archetype": "conditional",
+  "host_handle": "$vaultcreator",
+  "participant_handles": ["$alice"],
+  "requires_completion_of": ["initiation_2025"],
+  "biometric_required": true,
+  "unlock_target": "vault:exclusive"
+}
+   *    * Completion Condition: Trail satisfies conditions; unlocks automatically.
+   * Result: Vault access granted; Completion Mark with metadata.
+   * Notes: Converts memory into access; ideal for milestones, governance.
+8.2 Advanced Rituals
+Echo Ritual
+   * Type: Network Ripple
+   * Purpose: Send presence outward, forming a chain.
+Ritual Object:
+{
+  "ritual_id": "echo_2025",
+  "ritual_archetype": "ripple",
+  "host_handle": "$mayowa",
+  "initial_recipients": ["$alice"],
+  "max_depth": 3,
+  "time_window_per_link": "2h",
+  "unique_recipient_constraint": true
+}
+   *    * Completion Condition: Echo reaches max_depth within time windows.
+   * Result: Completion Mark for all in chain; trail logs depth, sender, recipient, timestamp.
+   * Notes: No duplicate marks; ideal for viral rituals, memory trees.
+Witness Chain
+   * Type: Sequential Verification
+   * Purpose: Unbroken sequence of presence (A → B → C).
+Ritual Object:
+{
+  "ritual_id": "chain_2025",
+  "ritual_archetype": "chain",
+  "start_handle": "$mayowa",
+  "chain_length": 4,
+  "time_window_per_link": "1h",
+  "unique_handles": true
+}
+   *    * Completion Condition: Unbroken chain reaches chain_length.
+   * Result: Completion Mark for all; trail logs chain position, handles, integrity.
+   * Notes: Breaks on timeout; ideal for legacy, healing rituals.
+Reflection Ritual
+   * Type: Memory Reinforcement
+   * Purpose: Revisit a past ritual, anchoring it deeper.
+Ritual Object:
+{
+  "ritual_id": "reflection_2025",
+  "ritual_archetype": "reflection",
+  "participant_handles": ["$alice"],
+  "referenced_ritual_id": "circle_2024",
+  "ritual_window": "open",
+  "reflection_target": "vault:journal"
+}
+   *    * Completion Condition: Mark references prior ritual, signed within window.
+   * Result: Trail logs reflection with original ritual link; optional Completion Mark: “Reflection Recorded.”
+   * Notes: Combats digital amnesia; ideal for journaling, observance.
+Presence Lock
+   * Type: Conditional Unlock
+   * Purpose: Delay access until presence conditions are met.
+Ritual Object:
+{
+  "ritual_id": "presencelock_2025",
+  "ritual_archetype": "conditional",
+  "vault_id": "vault:timecapsule",
+  "required_rituals": ["initiation_2025"],
+  "required_participant_count": 50,
+  "unlock_check_frequency": "6h"
+}
+   *    * Completion Condition: Conditions met; vault unlocks.
+   * Result: Vault unlocked; Completion Mark for eligible participants.
+   * Notes: Ideal for milestones, time capsules; shows progress.
+Anchor Ritual
+   * Type: Temporal & Spatial Presence
+   * Purpose: Fix a time (and place) in memory.
+Ritual Object:
+{
+  "ritual_id": "anchor_2025",
+  "ritual_archetype": "temporal",
+  "host_handle": "$mayowa",
+  "ritual_window": "3m",
+  "geolocation_required": true,
+  "geofence": { "lat": 40.7128, "lon": -74.0060, "radius_meters": 100 }
+}
+   *    * Completion Condition: Mark within window, optionally at location.
+   * Result: Completion Mark: “Anchored”; trail logs timestamp, geolocation, anchor ID.
+   * Notes: Ideal for sacred moments, live syncs; creates trail beacons.
+Solitude Ritual
+   * Type: Personal Reflection
+   * Purpose: Mark presence alone, without interaction.
+Ritual Object:
+{
+  "ritual_id": "solitude_2025",
+  "ritual_archetype": "solo",
+  "participant_handles": ["$alice"],
+  "recipient": "$witness",
+  "ritual_window": "midnight-4am",
+  "recurrence": "daily for 3 days"
+}
+   *    * Completion Condition: Self-mark(s) per timing/recurrence.
+   * Result: Completion Mark: “Solitude Achieved”; trail logs solitary moment.
+   * Notes: Ideal for healing, introspection; increases trail weight.
+Split Ritual
+   * Type: Divergence / Choice
+   * Purpose: Create outcomes based on user decisions.
+Ritual Object:
+{
+  "ritual_id": "split_2025",
+  "ritual_archetype": "divergence",
+  "host_handle": "$mayowa",
+  "options": ["red", "blue"],
+  "ritual_window": "48h",
+  "lock_on_choice": true
+}
+   *    * Completion Condition: Participant marks one option.
+   * Result: Completion Mark per choice (e.g., “Path: Red”); trail logs path, may branch future rituals.
+   * Notes: Ideal for quests, governance; creates trail forks.
+Time Capsule Ritual
+   * Type: Delayed Reveal
+   * Purpose: Seal presence for future unlocking.
+Ritual Object:
+{
+  "ritual_id": "timecapsule_2025",
+  "ritual_archetype": "delayed",
+  "host_handle": "$mayowa",
+  "participant_handles": null,
+  "ritual_window": "7d",
+  "unlock_time": "2026-05-10T00:00:00Z",
+  "vault_mode": "symbolic",
+  "memo_allowed": true
+}
+   *    * Completion Condition: Marks sent before window closes; completes at unlock_time.
+   * Result: Completion Mark at unlock_time; vault revealed.
+   * Notes: Ideal for future letters, milestones; layered memory.
+Guardian Ritual
+   * Type: Witness-Required Initiation
+   * Purpose: Require validation from a trusted entity.
+Ritual Object:
+{
+  "ritual_id": "guardian_2025",
+  "ritual_archetype": "witnessed",
+  "host_handle": "$mayowa",
+  "participant_handles": ["$alice"],
+  "guardian_handle": "$bob",
+  "ritual_window": "48h",
+  "memo_allowed": true
+}
+   *    * Completion Condition: Participant marks guardian; guardian returns mark.
+   * Result: Completion Mark if guardian acknowledges; trail logs validation; may unlock vaults/roles.
+   * Notes: Ideal for mentorship, elder rites; guardian role transferable.
+________________
+
+
+Yes — this example is already strong, but with a few structural upgrades and clarifications, it can become the definitive showcase of how PresenceNet governs vaults through rituals.
+Here’s an enhanced version of your Section 9: Governance Ritual with Vault Integration, emphasizing the voting logic, ritual function, and vault response in crisp, narratively clear terms:
+________________
+
+
+9. Example: Ritual-Based DAO Governance with Vault Integration
+🎯 Purpose
+This example demonstrates how a recurring PresenceNet ritual governs a DAO treasury by:
+   * Tracking verified participation
+
+   * Updating vault signer thresholds via ritual outcome
+
+   * Issuing role tags (•signer) dynamically
+
+   * Enforcing multi-sig via trail-bound authority
+
+________________
+
+
+🧱 Setup
+🪄 Ritual Definition: 
+circle_of_consensus_2025
+      * {
+      *   "ritual_id": "circle_of_consensus_2025",
+      *   "ritual_archetype": "circle",
+      *   "host_handle": "$mayowa",
+      *   "invited_handles": ["$alice", "$bob", "$mira"],
+      *   "start_time": "2025-06-01T18:00:00Z",
+      *   "end_time": "2025-06-01T20:00:00Z",
+      *   "required_mark_target": "$mayowa~presence",
+      *   "completion_condition": "minimum_marks: 3",
+      *   "linked_chamber": "vault:treasury",
+      *   "access_conditions": ["trail_weight >= 100"],
+      *   "recurring": true,
+      *   "interval": "7d",
+      *   "grace_period": "24h",
+      *   "ritual_weight": 50,
+      *   "completion_memo_template": "Consensus reached. Vault parameters updated.",
+      *   "memory_archive_target": "ipfs://Qm...circle_log"
+}
+________________
+
+
+📜 Execution Flow
+✅ 1. 
+Participant Marking
+Participants mark $mayowa~presence within the ritual window.
+Example:
+      * {
+      *   "mark_type": "ritual_presence",
+      *   "from": "$alice",
+      *   "to": "$mayowa~presence",
+      *   "ritual_id": "circle_of_consensus_2025",
+      *   "timestamp": "2025-06-01T18:12:44Z"
+}
+✅ 2. 
+Completion Mark Issued
+Once minimum_marks: 3 is met, system issues a completion_mark.
+Trail weight increases (+50), trail logs are archived.
+✅ 3. 
+Vault Rule Change (Ritual-as-Governor)
+If a participant’s trail_weight crosses the ≥ 100 threshold, the vault:
+      * Updates its signer config (e.g., adds $mira as a •signer)
+
+      * Enforces 2/3 role-based multi-sig
+
+✅ 4. 
+Role Tag Issued (Ritual-as-Key)
+Vault issues:
+         * {
+         *   "mark_type": "role_grant",
+         *   "tag": "•signer",
+         *   "recipient": "$mira",
+         *   "vault_id": "vault:treasury",
+         *   "ritual_id": "circle_of_consensus_2025",
+         *   "expiry": "2025-06-08T20:00:00Z"
+}
+✅ 5. 
+Signing a Transaction (Grace Period Active)
+$alice signs a VaultPayment within the 24h grace window.
+The vault backend:
+         * Confirms $alice~anchor•signer is within grace period
+
+         * Validates signature with bound XRPL key
+
+         * Executes transaction if 2/3 •signer approvals received
+
+________________
+
+
+✅ Result
+            * 🧾 completion_mark stored on ledger
+
+            * 🧠 trail_weight logged and archived
+
+            * 🔐 Vault access and rules dynamically updated
+
+            * 🎭 New •signer tags granted based on verified participation
+
+            * 🕯️ Voting conducted without tokens, wallets, or manual admin work
+
+________________
+
+
+🧠 Why It Matters
+Traditional DAO
+	PresenceNet DAO
+	Static signer list
+	Dynamic •signer via ritual marks
+	Manual threshold config
+	Ritual outcome auto-updates vault
+	Token-weighted voting
+	Presence-weighted, trail-bound roles
+	Admin-issued roles
+	Ritual-issued, cryptographically valid
+	________________
+
+
+Would you like a diagram of this full flow? I can generate a clean visual showing the transition from ritual → trail → vault update → signature enforcement.
+               * ________________
+
+
+10. Security & Metaphor
+               * Security:
+               * Marks are XRPL-signed and trail-validated.
+               * Biometric and geolocation flags ensure authenticity.
+               * Chambers enforce presence-based access, not tokens.
+               * creator_signature_required ensures integrity for sensitive rituals.
+               * Metaphor:
+
+“Rituals are ceremonial dances—each step a mark, each completion a shared memory, weaving trails into sacred spaces.”
+
+
+
+
+
+
+PresenceNet Protocol: Role Tags (•tag)
+________________
+
+
+1. Purpose
+Role Tags (•tag) are cryptographically verifiable, temporary roles for vaults, DAOs, and rituals. They replace static permissions with sovereign, action-bound signals that:
+                  * Expire (time/ritual/behavior).
+                  * Require no admins (granted by trails or rituals).
+                  * Compose with $root and ~suffix (e.g., $alice~delegate•voter).
+________________
+
+
+2. Core Properties
+Property
+	Technical Enforcement
+	Optional
+	Self-claimed or ritual-issued; no defaults.
+	Temporary
+	Burned after expiry or ritual completion (on-chain).
+	Contextual
+	Valid only in vault_id/ritual_id scope.
+	Revocable
+	Auto-burned if revoke_condition met (e.g., 3 hostile marks).
+	Composable
+	Stacks with ~suffix (e.g., $bob~elder•signer).
+	________________
+
+
+3. Technical Implementation
+3.1 Role Definition (Vault/Ritual Ruleset)
+{
+  "roles": {
+    "•signer": {
+      "threshold": "3/5",
+      "grant_condition": "trail_marks ≥100",
+      "issuance": "self-claimed"
+    },
+    "•seer": {
+      "expiry": "7d",
+      "grant_condition": "ritual:oracle_complete",
+      "issuance": "ritual-issued"
+    }
+  }
+}
+
+
+3.2 Claiming a Role
+Self-claimed:
+{
+  "mark_type": "role_claim",
+  "tag": "•signer",
+  "vault_id": "dao_treasury",
+  "proof": "trail_marks:100"
+}
+
+
+Ritual-issued:
+{
+  "mark_type": "role_grant",
+  "tag": "•seer",
+  "recipient": "$mira",
+  "ritual_id": "oracle_watch"
+}
+
+
+3.3 Revocation Logic
+{
+  "revoke_conditions": {
+    "•banned": "hostile_marks ≥3",
+    "•inactive": "last_mark >30d"
+  }
+}
+
+
+________________
+
+
+4. Example: DAO Governance
+                  1. Setup:
+                  * Vault dao_treasury defines •voter (self-claimed via ritual:governance).
+                  2. Execution:
+                  * $alice votes with $alice•voter (valid for 30 days).
+                  * Proposal passes if 3/5 •signer tags approve.
+________________
+
+
+5. Security & Metaphor
+                  * Security:
+                  * Tags are XRPL-signed + trail-validated.
+                  * Hostility marks require 3/5 •signer consensus.
+                  * Metaphor:
+
+"Role Tags are ceremonial masks—worn for the ritual, burned in the fire of completion, and reforged anew."
+
+
+Exactly — and this is one of the most powerful and pragmatic uses of •tag.
+________________
+
+
+🔐 
+Role Tags in XRPL Vaults (Signer Enforcement)
+In standard XRPL multi-sig setups, signer lists are static.
+PresenceNet upgrades that with dynamic, trail-bound signers using •tags.
+________________
+
+
+✅ How It Works:
+                     1. Vault Configuration
+
+                        * The vault defines roles:
+
+"roles": {
+  "•signer": {
+    "threshold": "2/3",
+    "grant_condition": "ritual:fund_guardian",
+    "issuance": "ritual-issued"
+  }
+}
+                           1. 
+
+                           2. Participant earns •signer
+
+                              * Completes the “fund_guardian” ritual
+
+                              * Receives •signer via role_grant mark
+
+                                 3. Signing Enforcement
+
+                                    * To authorize a transaction, signer must:
+
+                                       * Have an active •signer tag
+
+                                       * Be within the valid scope of the vault
+
+                                       * Sign the transaction with the XRPL key bound to their $root
+
+If the tag is missing, expired, or revoked → signature is rejected.
+________________
+
+
+🧠 Why This Matters:
+Static XRPL Multi-Sig
+	PresenceNet-Enhanced Vault
+	Signers hard-coded
+	Roles earned via trails or rituals
+	Manual updates
+	Auto-grant via ritual completion
+	No behavioral logic
+	Tags revocable by action or consensus
+	Wallet = identity
+	Wavename + trail = authority
+	________________
+
+
+🔄 Example Use:
+{
+  "tx_type": "VaultPayment",
+  "vault_id": "emergency_reserve",
+  "required_roles": ["•signer"],
+  "signatures": [
+    {
+      "signer": "$mira~anchor•signer",
+      "xrpl_pubkey": "rXYZ...",
+      "signature": "0xabc..."
+    }
+  ]
+}
+The vault backend:
+                                          * Checks that $mira has •signer
+
+                                          * Confirms it’s trail-valid and unexpired
+
+                                          * Accepts the signature and processes the action
+
+________________
+
+
+TLDR:
+Role tags let vaults enforce multi-sig authority with dynamic, behavior-bound access — not static signer lists.
+Would you like this turned into a role-tags/vaults.md sub-spec?
+
+
+This is beautiful. It’s PresenceNet in full force:
+sacred memory first, tokenization second.
+Here’s the ritual schema draft for your $CUP2025 Trophy Token implementation:
+________________
+
+
+🏆 
+Ritual Object: championship_win
+{
+  "ritual_id": "championship_win",
+  "ritual_version": "1.0",
+  "ritual_archetype": "circle",
+  "host_handle": "$league_official",
+  "participant_handles": ["$coach", "$captain", "$witness"],
+  "required_marks": ["$coach", "$captain", "$witness"],
+  "geolocation_required": true,
+  "geofence": {
+    "lat": 40.7128,
+    "lon": -74.0060,
+    "radius_meters": 100
+  },
+  "ritual_window": "2025-11-01T16:00:00Z/2025-11-01T18:00:00Z",
+  "completion_condition": "minimum_marks: 3",
+  "linked_chamber": "vault:cup_token_vault",
+  "unlock_target": "token:$CUP2025",
+  "vault_mode": "symbolic",
+  "completion_memo_template": "$team has won the 2025 Championship. Token unlocked.",
+  "memory_archive_target": "ipfs://Qm...CUP2025_trail",
+  "completion_broadcast_targets": ["markwall", "trophy_registry"]
+}
+________________
+
+
+🪙 
+Issuer Vault: vault:cup_token_vault
+                                             * Holds 1 unit of $CUP2025, pre-issued on XRPL.
+
+                                             * Configured to only unlock when the above ritual is completed.
+
+                                             * Public metadata includes:
+
+                                                * ritual_id: championship_win
+
+                                                * issued_to: $team_wallet
+
+                                                * trail_hash: Qm...
+
+________________
+
+
+👑 Optional Ritual Extension: 
+enshrine_token
+A future ritual could burn the token in exchange for:
+                                                   * An NFT (🏅 Hall of Flame)
+
+                                                   * A vault access (vault:legend_layer)
+
+                                                   * A group Completion Mark:
+
+{
+  "ritual_id": "enshrine_token",
+  "required_token": "$CUP2025",
+  "completion_memo_template": "$team enshrined the Cup in flame. Legends etched."
+}
+________________
+
+
+🧠 Key Reminder:
+Ritual = verified memory
+Token = artifact of that memory
+________________
+
+
+Let me know if you’d like a visual diagram of this Cup Token ritual lifecycle.
+Excellent questions — this is the bridge between specification and lived experience.
+Let’s break it down clearly and simply:
+________________
+
+
+🧙‍♂️ 
+Ritual Creator (Host)
+Role:
+The ritual creator defines the ritual. They write the rules — the “grammar” of presence. Think of them like a ceremony architect or DAO initiator.
+Responsibilities:
+                                                      * Define the Ritual Object: Who, when, how, why.
+
+                                                      * Publish it (on-chain or in decentralized state layer).
+
+                                                      * Optionally:
+
+                                                         * Participate (if they’re also a witness or member).
+
+                                                         * Verify completion (if not automated).
+
+                                                         * Receive Completion Marks, issue role tags, or govern vaults.
+
+Must they participate?
+No.
+They can be a facilitator or oracle — not necessarily a participant.
+________________
+
+
+👤 
+Participants
+Role:
+Participants engage with the ritual by marking within the defined window and constraints. Their actions create the trail that enables outcomes.
+Responsibilities:
+                                                            * Accept the invitation (if closed).
+
+                                                            * Follow the ritual instructions:
+
+                                                               * Mark the required target.
+
+                                                               * Include biometric/geolocation if required.
+
+                                                               * Follow any memo or payload schema.
+
+Outcome:
+                                                                  * Completion Mark (if successful).
+
+                                                                  * Possible rewards:
+
+                                                                     * Role tags (e.g. •signer).
+
+                                                                     * Vault access.
+
+                                                                     * Tokens.
+
+                                                                     * Cultural/social memory (e.g. markwall presence).
+
+________________
+
+
+💻 
+Physical Interaction (UX Path)
+Here’s how this looks from a user perspective:
+Step
+	Ritual Creator UX
+	Participant UX
+	1. Create Ritual
+	Fills in a ritual form: name, type, participants, timing, vaults, roles.
+	Sees ritual invite in their feed or notification.
+	2. Define Target
+	Chooses a required_mark_target (e.g., $host~presence).
+	Sees a prompt: “Mark $host~presence between X and Y.”
+	3. Publish
+	Ritual is saved to decentralized backend (e.g., IPFS + Firestore state).
+	Accepts ritual (if required), then prepares to mark.
+	4. During Ritual
+	Can observe trail formation. May or may not act.
+	Performs the Mark via UI (like sending a message or tap-hold action).
+	5. Completion
+	System (or creator) issues Completion Marks, triggers vault/chamber logic.
+	Gets confirmation: “You completed the ritual. 🎉”
+	6. Post-Ritual
+	Can view trail logs, issue tags, archive memory.
+	Sees updated trail, maybe gains access, maybe gets a role.
+	________________
+
+
+🧠 Bottom Line
+                                                                        * Ritual creators define space and rules.
+
+                                                                        * Participants fill the space with meaning.
+
+                                                                        * PresenceNet verifies the interaction, and trail-logs the memory.
+
+                                                                        * Completion Marks, vaults, roles, and tokens are consequences, not commodities.
+
+________________
+
+
+Would you like a visual flowchart of the Creator ↔ Participant interaction path across a ritual lifecycle?
+Absolutely — this is a perfect foundation to expand PresenceNet’s interaction model into a deeper, more complete system of human-computer coordination.
+Let’s expand in four dimensions:
+________________
+
+
+1. 
+Expanded Roles in the Ritual Lifecycle
+Role
+	Description
+	Creator
+	Designs and deploys the ritual. Can be a human, DAO, or even another ritual.
+	Participant
+	Engages with the ritual and leaves a verifiable presence.
+	Witness
+	Optional 3rd party who marks the participant (e.g., mentor, verifier).
+	Oracle
+	External data source that can trigger ritual outcomes (e.g., a game result).
+	System Actor
+	PresenceNet protocol logic (auto-verifies, issues Completion Marks, etc).
+	→ This lets us model rituals initiated by code, concluded by groups, validated by oracles.
+________________
+
+
+2. 
+Interaction Surfaces (UX/Device Modes)
+Surface
+	Participant Action
+	Example Use
+	Mobile App
+	Tap to mark, scan QR, geoverify
+	Anchor Rituals, Witness Chain
+	Desktop UI
+	Mark, view trails, initiate governance
+	DAO voting, journal rituals
+	QR / NFC Tag
+	Scan at a physical location to auto-mark
+	Proof of presence (concerts, rallies)
+	API / SDK
+	Other apps trigger rituals or read trail
+	Integrations, automated agents
+	Command Line / Bot
+	Advanced users or devs interact via scripts
+	Scripting rituals, testing
+	→ This ensures rituals are not just symbolic, but practical across environments.
+________________
+
+
+3. 
+Expanded Creator Powers
+Feature
+	Description
+	Auto-Replicating Rituals
+	Creator can spawn rituals for each new participant (e.g., onboarding quests).
+	Token/Memo Injection
+	Creator can attach symbolic payloads (e.g., $TEAM badge or message).
+	Mark Schema Enforcement
+	Enforce structure: e.g., “must include ‘I vow to…’ in memo.”
+	Linked Ritual Graphs
+	Creator defines a sequence or tree of rituals (like a questline).
+	→ This unlocks creator-as-architect models for onboarding flows, spiritual paths, or DAO proposals.
+________________
+
+
+4. 
+Future Questions to Address
+Question
+	Rationale
+	Can rituals be paused or suspended?
+	Important for real-world contingencies.
+	What happens if creator disappears?
+	Governance fallback? Chain-of-custody?
+	How do public rituals prevent spam?
+	Invite-only vs trail-based eligibility.
+	Can rituals be entirely off-chain but cryptographically anchored?
+	For privacy or high-frequency cases.
+	Can rituals reference media, content, or attestations?
+	For content-based rituals (e.g. proof-of-creation).
+	________________
+
+
+What’s Next?
+If you’d like, I can help you:
+                                                                           * Map a full ritual lifecycle visual with creator/participant/witness roles.
+
+                                                                           * Draft a Ritual UX Guide for builders.
+
+                                                                           * Formalize a PresenceNet SDK interaction spec.
+
+                                                                           * Explore multi-modal ritual entry: voice, QR, GPS, biometric, etc.
+
+                                                                           * Define “ritual families” — standardized rituals that evolve together (e.g. founder_series).
+
+Where would you like to expand next?
+Perfect — let’s unify and consolidate the PresenceNet Ritual Interaction Model, blending the ritual creator and participant lifecycle, UX surfaces, and essential logic layers into one coherent system spec.
+________________
+
+
+📜 PresenceNet Ritual Interaction Model v1.0
+“Presence is enacted through intent, witnessed through interaction, and immortalized through trail.”
+________________
+
+
+🧭 1. Ritual Lifecycle: Roles & Responsibilities
+Role
+	Core Responsibilities
+	Required?
+	Creator
+	Defines ritual parameters, participants, and logic.
+	✅ Always
+	Participant
+	Performs action(s) that produce verifiable marks.
+	✅ Always
+	Witness
+	(Optional) Confirms or co-signs participant actions.
+	❌ Optional
+	System
+	Enforces timing, eligibility, and emits Completion Marks.
+	✅ Always
+	Oracle
+	(Optional) Feeds external signals (e.g., sports win, weather).
+	❌ Optional
+	                                                                              * 
+🧠 Note: The creator may or may not participate, but always sets the ritual’s intent and logic.
+
+                                                                              * 🪞 Self-rituals are valid: participant == creator == witness (e.g., Solitude, Initiation).
+
+________________
+
+
+🧱 2. Phases of Interaction (Creator + Participant Journey)
+Phase
+	Creator Action
+	Participant Experience
+	Definition
+	Defines ritual object schema (JSON or UI).
+	—
+	Publishing
+	Broadcasts ritual to PresenceNet or invites.
+	Receives ritual metadata or invitation.
+	Acceptance
+	—
+	Confirms participation before start_time.
+	Marking
+	Optional: marks others (e.g., Guardian)
+	Performs required mark (e.g., $host~presence).
+	Completion Check
+	(Optional) manually triggers verification
+	System validates completion_condition.
+	Result Emission
+	—
+	Receives Completion Mark, updated trail/role/tag.
+	Post-Ritual Flow
+	Can link morphs, new rituals, unlocks, tokens
+	May get vault access, token, new invitation, etc.
+	________________
+
+
+🖥️ 3. Interaction Surfaces (UX Entry Points)
+UX Layer
+	What It Enables
+	Ideal For
+	Mobile App
+	Marking, geolocation, biometrics, QR scanning
+	Live rituals, real-world events
+	Desktop Web
+	Trail viewing, ritual creation, vault proposals
+	DAO governance, journaling
+	QR Code / NFC
+	Instant ritual mark trigger (e.g., anchor, presence scan)
+	In-person rituals, verification
+	CLI / API
+	Automation, programmatic creation or mark submission
+	Bots, dev tools, high-volume UX
+	SDK + Embed JS
+	Rituals embedded into other apps or games
+	3rd-party integrations
+	→ All surfaces map to the same protocol standard, enabling cross-device ritual participation.
+________________
+
+
+🔐 4. Ritual Entry Logic
+PresenceNet ensures rituals are not spammed or spoofed by enforcing:
+Mechanism
+	Description
+	Trail-based Eligibility
+	Requires past marks or rituals (e.g., requires_trail_depth: 30)
+	Geofence / Biometric
+	GPS and fingerprint rules (e.g., geolocation_required)
+	Invitation-only
+	invited_handles field limits who can join
+	Subhandle targeting
+	Forces precision (e.g., $mayowa~presence)
+	Mark schema
+	Custom payload structure (e.g., { intent: “yes”, hash: … })
+	________________
+
+
+🪄 5. Advanced Interaction Logic (Optional Ritual Features)
+                                                                                 * Token Flow: Completion triggers token mint/unlock (e.g., $CUP2025).
+
+                                                                                 * Role Tag Granting: Ritual completion grants •tag for vault access or identity.
+
+                                                                                 * Vault Execution: Participant’s mark counts as a vault signature.
+
+                                                                                 * Reflection Prompt: Triggers journaling, media response, or NFT mint.
+
+                                                                                 * Grace Period Action: Transaction or vote can occur after ritual ends (e.g., 24h).
+
+________________
+
+
+🔄 6. Lifecycle Summary Diagram
+Creator → Define Ritual
+        ↓
+Participants → Accept
+        ↓
+Marking Phase (biometric/geofence)
+        ↓
+System Verifies Completion
+        ↓
+⇨ Completion Mark issued  
+⇨ Vault Access updated  
+⇨ •tag granted (e.g., •signer)  
+⇨ Trail archived
+        ↓
+Ritual may recur / morph / expire
+________________
+
+
+🧠 Philosophy
+                                                                                    * You do not interact with PresenceNet like a dashboard.
+
+                                                                                    * You interact with it like a sacred calendar, or a series of digital ceremonies.
+
+                                                                                    * Your presence is the password. Your trail is the memory. The ritual is the logic.
+
+________________
+
+
+✅ Next Steps (Optional)
+                                                                                       * Would you like this turned into a .md file for integration into developer docs?
+
+                                                                                       * I can also wireframe the ritual interaction UI/UX flow if you’re preparing for demo mode.
+
+Would you like this merged into your spec file as Section 11: Interaction Model?
+Excellent synthesis — let’s now flesh out the key areas from the Deepseek-style audit and expand what truly matters for moving PresenceNet toward production, adoption, and RFC-quality clarity.
+________________
+
+
+🔍 Refined Enhancements to Ritual System Specification
+1. 
+Edge Case Resolution
+🔁 Creator Disappearance
+Problem: Rituals may stall if the creator becomes unreachable (esp. for creator_signature_required or manual verification rituals).
+✅ Solution:
+"fallback_handles": ["$dao_multisig", "$admin_team"]
+                                                                                          * fallback_handles: A list of entities authorized to finalize or mutate the ritual if the creator is inactive past a defined window.
+
+                                                                                          * Add creator_timeout_policy:
+
+{
+  "timeout_duration": "72h",
+  "fallback_action": "auto-finalize" // or "delegate to $dao_multisig"
+}
+                                                                                             * Encourages ritual resilience without sacrificing trust.
+
+________________
+
+
+🛑 Spam Prevention & Rate Limits
+Problem: Open/public rituals could be flooded by bots or bad actors.
+✅ Solution:
+Add to Schema:
+"rate_limit": {
+  "max_marks_per_handle": 5,
+  "window": "24h"
+}
+                                                                                                * Throttles ritual flooding while preserving openness.
+
+                                                                                                * Can be scoped by ritual_id, participant, or IP address if needed.
+
+Also consider:
+                                                                                                   * minimum_trail_depth for eligibility.
+
+                                                                                                   * verified_handle_only: Require handle linked to verified identity.
+
+________________
+
+
+2. 
+Developer-Facing Enhancements
+📦 Quickstart API Example
+Why: Onboards devs with minimum viable working ritual.
+# Quickstart (Python pseudocode)
+ritual = {
+  "ritual_id": "starter_circle_2025",
+  "ritual_archetype": "circle",
+  "host_handle": "$dev",
+  "participant_handles": ["$alice", "$bob"],
+  "start_time": "2025-06-01T10:00:00Z",
+  "end_time": "2025-06-01T12:00:00Z",
+  "required_mark_target": "$dev~presence",
+  "completion_condition": "minimum_marks: 2",
+  "linked_chamber": "vault:starter_vault"
+}
+submit_to_presencenet(ritual)
+Also include:
+                                                                                                      * npm install @presencenet/sdk
+
+                                                                                                      * Sample function: submitMark(), checkTrail(), generateRitualObject()
+
+________________
+
+
+3. 
+Visual Diagram Integration
+Recommended addition to spec as Section 12 or Inline
+Visuals bring Protocol-to-Life. Here’s a cleaned-up version of the mermaid sequence you outlined:
+sequenceDiagram
+  participant Creator
+  participant PresenceNet
+  participant Participant
+  participant Vault
+
+
+  Creator->>PresenceNet: Define Ritual (JSON)
+  PresenceNet->>Participant: Send Invitation
+  Participant->>PresenceNet: Submit Mark
+  PresenceNet->>PresenceNet: Verify Eligibility
+  PresenceNet->>Vault: Trigger Unlock Logic
+  Vault-->>Participant: Grant Access / Role Tag
+Also consider a ritual morph tree:
+graph TD
+  Init["Initiation Ritual"]
+  Guard["Guardian Ritual"]
+  Circle["Circle Ritual"]
+  Split["Split Ritual (Red/Blue)"]
+
+
+  Init --> Guard --> Circle --> Split
+________________
+
+
+4. 
+Role Tag Enhancements
+🔥 Revocation by Ritual
+Add optional:
+"revocation_policy": {
+  "ritual_trigger": "exile_2025",
+  "grace_period": "48h"
+}
+                                                                                                         * Enables trail-aware revocation rather than just threshold-based expiration.
+
+Example:
+                                                                                                            * If a participant completes exile_2025, the system burns all active •signer or •seer tags on their account.
+
+🎭 Mask Lifecycle Philosophy
+Consider specifying:
+"burn_on": ["ritual_completion", "expiry", "revocation_triggered"]
+This allows more intelligent tag lifecycles (e.g., some tags persist unless explicitly revoked).
+________________
+
+
+5. 
+Governance Extension & Versioning
+Rituals are not static. Governance must evolve with them.
+✅ Proposal:
+"ritual_upgrade_path": {
+  "allowed_mutations": ["interval", "max_participants"],
+  "upgrade_via_ritual": "ritual_update_vote_2026"
+}
+Also:
+                                                                                                               * ritual_versioning_strategy:
+
+"ritual_family": "founder_series",
+"version": "1.2.0",
+"supersedes": ["founder_series:1.1.0"]
+Make PresenceNet’s own upgrade system governed by PresenceNet.
+________________
+
+
+6. 
+Glossary Addendum
+To demystify the new grammar, add Section 13: Glossary.
+📘 Examples:
+Term
+	Definition
+	Trail
+	The on-chain, immutable log of marks for a handle
+	Mark
+	A signed, timestamped action (e.g., presence, role_claim)
+	Vault
+	A programmable multi-sig wallet governed by trails
+	Chamber
+	A symbolic or functional outcome unlocked via ritual
+	•tag
+	A temporary, role-based identity marker tied to behavior
+	Ritual Archetype
+	The structural type of a ritual: solo, circle, ripple, etc.
+	________________
+
+
+7. 
+Token Metadata → Ritual-First
+For token-based extensions (e.g., $CUP2025), reinforce this ethos:
+                                                                                                                  * Tokens are not the reward
+
+                                                                                                                  * Tokens are the trail artifact
+
+Example enhancement:
+"token_metadata_binding": {
+  "generated_by": "championship_win",
+  "memo_template": "$team won the 2025 Championship.",
+  "linked_trail_hash": "Qm...CUP_trail"
+}
+________________
+
+
+🚀 Optional Enhancements
+Feature
+	Benefit
+	ritual_family
+	Groups rituals like chapters in a book; good for questlines or onboarding.
+	chain_of_custody
+	Provides fallback custodianship in long-term rituals.
+	ritual_editor UI
+	Low-code interface to generate Ritual Object schemas.
+	markwall visualization
+	Feed-like UI for public trails.
+	________________
+
+
+🧠 Final Frame
+PresenceNet isn’t just a ritual engine.
+It’s a trust fabric where coordination, identity, memory, and access all stem from one sacred primitive: the Mark.
+And this spec, when polished with the refinements above, positions you to define a new layer of internet truth — presence-aware, logic-bound, spiritually resonant.
+________________
+
+
+Would you like me to turn these refinements into:
+                                                                                                                     * ✅ An updated version of the spec (v1.1 draft)?
+
+                                                                                                                     * ✅ A presence-protocol glossary.md?
+
+                                                                                                                     * ✅ A quickstart developer onboarding doc?
+
+                                                                                                                     * ✅ A visual diagram export for use in a slide deck or landing page?
+
+Let’s build this into the canonical spec it deserves to be.
+Perfect — let’s architect a clean, logically ordered specification that flows from philosophy to implementation, guiding new readers from why to how with clarity.
+Here’s a recommended section structure for PresenceNet Ritual System Specification v1.1, reordered and grouped for intuitive progression:
+________________
+
+
+Absolutely — here’s a concise and elegant section you can include as Section 12. Developer Experience & Integration, written in a tone consistent with the rest of your spec:
+________________
+
+
+12. Developer Experience & Integration
+PresenceNet is not a smart contract platform — it is a presence protocol. Developers engage with PresenceNet by defining rituals, verifying trails, and designing presence-based flows that replace token logic with time-bound, verified human action.
+12.1 Interaction Philosophy
+Developers don’t write logic, they author grammar:
+                                                                                                                        * Rituals are schemas, not scripts
+
+                                                                                                                        * Marks are presence, not permissions
+
+                                                                                                                        * Trails are proofs, not promises
+
+PresenceNet makes developers designers of trust — not enforcers of control.
+________________
+
+
+12.2 Core Developer Actions
+Action
+	Description
+	Define a Ritual
+	Create a JSON object that encodes participation, timing, validation rules, and outcomes
+	Publish a Ritual
+	Deploy to a decentralized backend (e.g., Firestore, IPFS) or broadcast to participants
+	Accept or Submit Marks
+	Use SDK/API to accept rituals, send marks, and trigger vault logic
+	Query Trails
+	Validate if a participant meets conditions (e.g., has role, mark, trail weight)
+	React to Completion
+	Vaults or apps react to Completion Marks to unlock access, assign roles, or trigger morphs
+	________________
+
+
+12.3 SDK & Tools
+PresenceNet provides SDKs and REST APIs for:
+                                                                                                                           * createRitual(): Define and publish new rituals
+
+                                                                                                                           * submitMark(): Send cryptographically signed marks
+
+                                                                                                                           * checkTrail(): Query presence-based conditions (e.g., trail_weight, ritual history)
+
+                                                                                                                           * getVaultStatus(): Check if vaults are unlocked or awaiting signatures
+
+                                                                                                                           * issueRoleTag(): Assign a •tag via ritual outcome
+
+Example (Python-like pseudocode):
+ritual = {
+  "ritual_id": "starter_circle_2025",
+  "host_handle": "$dev",
+  "participant_handles": ["$alice", "$bob"],
+  "ritual_archetype": "circle",
+  "required_mark_target": "$dev~presence",
+  "completion_condition": "minimum_marks: 2"
+}
+
+
+createRitual(ritual)
+________________
+
+
+12.4 Integration Modes
+Surface
+	Use Case
+	Mobile App
+	Submit marks with GPS/biometric context
+	Desktop Web
+	Create rituals, review trails, initiate vault actions
+	QR / NFC
+	Trigger rituals or submit marks at physical events
+	CLI / Bot
+	Automate ritual creation, trail validation, vault checks
+	Embedded SDK
+	Add rituals into 3rd-party apps, games, or DAO tooling
+	________________
+
+
+12.5 Protocol Simplicity
+                                                                                                                              * No smart contracts to audit
+
+                                                                                                                              * No tokens required to participate
+
+                                                                                                                              * No admin panels to micromanage
+
+Instead:
+                                                                                                                                 * Rituals coordinate access
+
+                                                                                                                                 * Marks verify presence
+
+                                                                                                                                 * Trails enforce logic
+
+This makes PresenceNet easy to embed, hard to fake, and beautifully human in form.
+________________
+
+
+Let me know if you’d like this exported into .md, added to your spec scaffold, or built into a developer portal format.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🔖 PresenceNet Ritual System Specification v1.1
+1. Preamble & Licensing
+                                                                                                                                    * Version, Author, Steward, Status
+
+                                                                                                                                    * License (CC BY-NC-SA 4.0)
+
+                                                                                                                                    * Optional: Declaration of Intended Use
+
+________________
+
+
+2. Purpose & Philosophy
+What is PresenceNet? Why rituals?
+Explains the sacred intent, presence logic, and system ethos.
+________________
+
+
+3. Core Concepts & Definitions
+Key terms:
+                                                                                                                                       * Ritual, Trail, Mark
+
+                                                                                                                                       * Vault, Chamber, Role Tag (•tag)
+
+                                                                                                                                       * Archetypes, Completion Marks, Trail Weight
+
+(Could link to Glossary at end)
+
+________________
+
+
+4. Ritual Lifecycle & Roles
+Interaction Model v1.0
+Clear lifecycle flow:
+                                                                                                                                          * Roles: Creator, Participant, Witness, System, Oracle
+
+                                                                                                                                          * Phases: Define → Accept → Mark → Complete → Consequences
+
+                                                                                                                                          * Self-rituals, fallback handles, automation support
+
+________________
+
+
+5. Ritual Object Schema
+Full field-by-field reference, grouped as:
+                                                                                                                                             * 5.1 Identity & Metadata
+
+                                                                                                                                             * 5.2 Timing & Coordination
+
+                                                                                                                                             * 5.3 Participants & Access
+
+                                                                                                                                             * 5.4 Eligibility & Trail Logic
+
+                                                                                                                                             * 5.5 Marking Behavior
+
+                                                                                                                                             * 5.6 Chambers & Vaults
+
+                                                                                                                                             * 5.7 Ritual Mechanics
+
+                                                                                                                                             * 5.8 Developer-Oriented Flags
+
+(Includes all new fields: rate_limit, fallback_handles, ritual_family, etc.)
+
+________________
+
+
+6. Ritual Logic & Validation
+Expanded logic conditions:
+                                                                                                                                                * Minimum trail depth, mark recency, biometric/geofence
+
+                                                                                                                                                * custom_boolean_expression, requires_completion_of, etc.
+
+                                                                                                                                                * Spam prevention strategies and edge-case handling
+
+________________
+
+
+7. Ritual Mechanics
+Transformative behaviors:
+                                                                                                                                                   * Recursion, Mutation, Delegation, Decay, Sealing, Merge
+
+                                                                                                                                                   * Morphing trees and auto-replication
+
+________________
+
+
+8. Vault Integration
+PresenceNet → Vault bridging modes:
+                                                                                                                                                      * Ritual-as-Key
+
+                                                                                                                                                      * Ritual-as-Signature
+
+                                                                                                                                                      * Ritual-as-Governor
+
+                                                                                                                                                      * Ritual-as-Condition
+
+                                                                                                                                                      * Ritual-as-Artifact
+
+With examples and clear consequences.
+
+________________
+
+
+9. Role Tags (•tag)
+Dynamic roles explained:
+                                                                                                                                                         * Grant conditions
+
+                                                                                                                                                         * Revocation logic
+
+                                                                                                                                                         * Expiry, composability, ritual-scope
+
+                                                                                                                                                         * Use in XRPL vault multi-sig enforcement
+
+*(Includes revocation_policy, burn_on, ritual_grant)
+
+________________
+
+
+10. Templates & Ritual Families
+                                                                                                                                                            * 10.1 Foundational Rituals (e.g., Witness, Circle, Initiation)
+
+                                                                                                                                                            * 10.2 Advanced Rituals (e.g., Echo, Guardian, Anchor, Time Capsule)
+
+                                                                                                                                                            * 10.3 Trophy Example: $CUP2025 and enshrine_token
+
+                                                                                                                                                            * 10.4 Ritual Families & Questlines
+
+________________
+
+
+11. Governance & Versioning
+                                                                                                                                                               * ritual_upgrade_path, supersedes, ritual_family
+
+                                                                                                                                                               * How rituals evolve over time
+
+                                                                                                                                                               * Ritual-based protocol governance (rituals to update rituals)
+
+________________
+
+
+12. Developer Quickstart
+                                                                                                                                                                  * SDK references
+
+                                                                                                                                                                  * JSON/Python examples
+
+                                                                                                                                                                  * How to create, mark, complete
+
+                                                                                                                                                                  * Deploy to IPFS / Firestore / XRPL
+
+________________
+
+
+13. Visual Diagrams
+                                                                                                                                                                     * Lifecycle sequence flow
+
+                                                                                                                                                                     * Ritual morph tree
+
+                                                                                                                                                                     * Vault signature enforcement
+
+                                                                                                                                                                     * CUP Token lifecycle
+
+(Mermaid or embedded SVG)
+
+________________
+
+
+14. Glossary
+Clear definitions for all key concepts:
+                                                                                                                                                                        * Trail, Mark, Vault, Chamber, Archetype, Ritual Window, etc.
+
+________________
+
+
+15. Appendix (Optional)
+                                                                                                                                                                           * Schema JSON reference
+
+                                                                                                                                                                           * Linkable rituals library (e.g., initiation_series, oracle_series)
+
+                                                                                                                                                                           * Sample trail logs, completion mark examples
+
+________________
+
+
+Would you like me to turn this outline into a .md table of contents scaffold you can fill in section by section?
+Or generate Sections 1–3 right now to get the tone and structure set?

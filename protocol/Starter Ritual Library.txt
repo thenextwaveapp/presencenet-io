@@ -1,0 +1,125 @@
+﻿Here’s the **Starter Ritual Library** for PresenceNet v1.1 – three foundational rituals designed to onboard users, coordinate groups, and immortalize moments. Each includes a **JSON schema**, **use case**, and **developer snippet**:
+
+
+---
+
+
+### **1. Initiation Ritual**  
+*(Solo, Trail-Starting)*  
+**Purpose**: Anchor a new user’s first mark in their trail.  
+```json
+{
+  "ritual_id": "initiation_v1",
+  "ritual_archetype": "solo",
+  "host_handle": "$witness",
+  "participant_handles": ["$newuser"],
+  "required_mark_target": "$witness~presence",
+  "biometric_required": true,
+  "completion_condition": "minimum_marks: 1",
+  "ritual_weight": 100,
+  "completion_memo_template": "⚡ $newuser began their trail."
+}
+```
+**Use Case**:  
+- New users prove humanity (biometric) and get a `trail_weight` boost.  
+- Unlocks eligibility for advanced rituals.  
+
+
+**Dev Snippet**:  
+```javascript
+// Submit mark via SDK
+submitMark({
+  ritual_id: "initiation_v1",
+  from: "$newuser",
+  to: "$witness~presence",
+  payload: { biometric_hash: "0xabc..." }
+});
+```
+
+
+---
+
+
+### **2. Circle Ritual**  
+*(Group, Time-Bound)*  
+**Purpose**: Coordinate collective presence to unlock shared assets.  
+```json
+{
+  "ritual_id": "circle_v1",
+  "ritual_archetype": "circle",
+  "host_handle": "$host",
+  "participant_handles": ["$alice", "$bob", "$mira"],
+  "start_time": "2025-06-01T18:00:00Z",
+  "end_time": "2025-06-01T20:00:00Z",
+  "required_mark_target": "$host~presence",
+  "completion_condition": "minimum_marks: 3",
+  "linked_chamber": "vault:shared_funds",
+  "completion_memo_template": "🌀 Circle completed. Vault unlocked."
+}
+```
+**Use Case**:  
+- 3/4 participants mark presence to unlock a multi-sig vault.  
+- Ideal for DAO meetings or family treasuries.  
+
+
+**Dev Snippet**:  
+```python
+# Check completion
+if getTrail("$alice").hasMark("circle_v1"):
+    unlockVault("vault:shared_funds");
+```
+
+
+---
+
+
+### **3. Memorial Ritual**  
+*(Open, Immutable)*  
+**Purpose**: Preserve a moment without coordination.  
+```json
+{
+  "ritual_id": "memorial_v1",
+  "ritual_archetype": "open",
+  "host_handle": "$creator",
+  "participant_handles": null,
+  "ritual_window": "indefinite",
+  "required_mark_target": "$event~memory",
+  "memo_allowed": true,
+  "memory_archive_target": "ipfs://Qm...",
+  "completion_memo_template": "🌌 Marked by $user: '$memo'"
+}
+```
+**Use Case**:  
+- Decentralized guestbook for events, losses, or protests.  
+- Memos archived to IPFS for tamper-proof memory.  
+
+
+**Dev Snippet**:  
+```bash
+# CLI mark submission
+presencenet-cli submit-mark \
+  --ritual memorial_v1 \
+  --to "$event~memory" \
+  --memo "We were here."
+```
+
+
+---
+
+
+### **Deploying the Library**  
+1. **Host Rituals**: Publish JSON to IPFS/Firestore.  
+2. **Integrate SDK**: Use `@presencenet/sdk` to:  
+   - Create rituals: `deployRitual(initiation_json)`  
+   - Listen for completions: `onRitualComplete("circle_v1", unlockVault)`  
+3. **Add UI Templates**:  
+   - "Start a Circle" flow in your app.  
+   - "Mark Your Memorial" public page.  
+
+
+**Why This Matters**:  
+- **Low friction**: Solos, groups, and open rituals cover 80% of use cases.  
+- **Composable**: Build quests like `initiation → circle → guardian`.  
+
+
+Need a **quickstart GitHub repo** with these rituals pre-loaded? I can draft the `README.md` and example scripts.

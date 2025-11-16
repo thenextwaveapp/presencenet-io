@@ -1,0 +1,141 @@
+﻿________________
+
+
+🔐 Ritual → Vault Integration
+How Rituals Unlock and Govern Vaults in PresenceNet
+In PresenceNet, Vaults are multi-user XRPL wallets governed by presence-based rules. Rituals are the coordination layer that determine who may access, sign for, or alter these vaults — based on verified memory and trail state.
+________________
+
+
+🧭 Integration Modes
+Here are the five supported patterns for ritual-to-vault interaction:
+________________
+
+
+1. Ritual-as-Key
+Use Case: Unlocking access to a vault after presence is verified
+When a ritual is completed, the user is granted access to a specific vault.
+* Trigger: on_completion → grant_vault_access(vault_id)
+
+* Can be configured in the ritual definition
+
+* Access may be temporary or permanent based on ritual rules
+
+Example:
+Complete the “Circle Ritual” → unlock the shared vault $creativevault
+Common Uses:
+   * Initiation sequences
+
+   * Time-based access gates
+
+   * Community onboarding
+
+   * Chamber-to-vault transitions
+
+________________
+
+
+2. Ritual-as-Signature
+Use Case: Using marks as multi-sig signatures for proposals
+Each qualifying mark within a ritual counts as a valid vault signature toward a proposal (e.g. fund release, config change).
+      * Vault checks that a threshold number of ritual marks are present
+
+      * Ritual effectively acts as a proxy signer system
+
+Example:
+All 3 mentors mark a ritual → their signatures count toward a vault release action
+Common Uses:
+         * Group voting
+
+         * Collaborative funding
+
+         * Governance flows
+
+________________
+
+
+3. Ritual-as-Condition
+Use Case: Vault remains locked until ritual prerequisites are fulfilled
+Vault access is conditionally tied to the completion of specific rituals or trail states.
+            * Ritual Completion Marks are evaluated by the vault’s access_conditions
+
+            * Vault remains invisible or sealed until met
+
+Example:
+“Vault of the Ancients” only unlocks if user has completed all of:
+               * Initiation
+
+               * Guardian
+
+               * Memorial
+
+Common Uses:
+                  * Lore-based access control
+
+                  * Trail-based privileges
+
+                  * Hierarchical or spiritual unlocks
+
+________________
+
+
+4. Ritual-as-Artifact
+Use Case: Writing memory into the vault trail through ritual participation
+Instead of unlocking the vault, the ritual writes a symbolic or informational artifact into the vault record.
+                     * Each Completion Mark contributes a “memory entry”
+
+                     * Used for scrolls, letters, dedications, or collaborative journals
+
+Example:
+Completing “Solitude Ritual” → your private reflection is stored in vault_journal
+Common Uses:
+                        * Collaborative storytelling
+
+                        * Legacy deposits
+
+                        * Memory walls
+
+Note:
+In v0.2+, this is better handled through Chambers unless financial coordination is needed.
+________________
+
+
+5. Ritual-as-Governor
+Use Case: Rituals required to alter vault rules or structure
+Some vault configuration changes (e.g. threshold adjustment, adding/removing members) can only occur if a specific ritual is completed.
+                           * Vault checks for valid Completion Marks before allowing sensitive actions
+
+                           * Admin rights are replaced with presence-based consent
+
+Example:
+“To update the vault’s threshold, the ‘Circle of Consensus’ ritual must be completed”
+Common Uses:
+                              * Decentralized upgrades
+
+                              * Safe governance
+
+                              * Ritual-driven DAO mechanics
+
+________________
+
+
+🧠 Design Pattern Summary
+Integration Type
+	What It Does
+	Best For
+	Ritual-as-Key
+	Grants access to vault
+	Onboarding, symbolic unlocks
+	Ritual-as-Signature
+	Counts as a vault signature
+	Group voting, approval gates
+	Ritual-as-Condition
+	Gated access based on trail/rituals
+	Lore, hierarchy, progressive unlocks
+	Ritual-as-Artifact
+	Writes symbolic memory into vault
+	Journaling, storytelling, reflections
+	Ritual-as-Governor
+	Enables vault rule changes via ritual
+	Governance, configuration security
+	________________
