@@ -3,9 +3,9 @@
 /* Colour tokens (kept local so this page needs only the studio stylesheet) */
 .protocol-page {
     --seasalt: #f6f8fc;
-    --alice-blue: #e7f1fa;
-    --lapis-lazuli: #0b6cae;
-    --prussian-blue: #0a5590;
+    --alice-blue: #ebf1fd;
+    --lapis-lazuli: #1d5ad6;
+    --prussian-blue: #1648ae;
     --charcoal: #0f172a;
 }
 
@@ -23,7 +23,7 @@
 
 /* Protocol Header — original deep-navy blue */
 .protocol-header {
-    background: linear-gradient(135deg, #0E3A7A 0%, #0087b8 100%);
+    background: linear-gradient(135deg, #0E3A7A 0%, #3470e5 100%);
     color: white;
     padding: 80px 0 60px;
     text-align: center;
