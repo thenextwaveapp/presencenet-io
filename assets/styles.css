@@ -9,7 +9,7 @@
     --line:#e5eaf2;
     --blue:#1d5ad6;
     --blue-deep:#1648ae;
-    --blue-soft:#ebf1fd;
+    --blue-soft:#e9f5fc;
     --blue-glow:rgba(29,90,214,.14);
     --radius:18px;
     --max:1160px;
@@ -51,7 +51,7 @@
   .logo{font-weight:800;letter-spacing:-.02em;font-size:19px;display:flex;align-items:center;gap:10px}
   .logo-mark{
     width:30px;height:30px;border-radius:9px;flex-shrink:0;
-    background:linear-gradient(135deg,var(--blue),#5e8dec);
+    background:linear-gradient(135deg,var(--blue),#3f97dd);
     display:flex;align-items:center;justify-content:center;
     box-shadow:0 4px 14px var(--blue-glow);
   }
@@ -133,7 +133,7 @@
   .pill .pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.45)}55%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
   h1{font-size:clamp(38px,5.6vw,66px);font-weight:800;letter-spacing:-.03em;line-height:1.08}
-  h1 .grad{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.12em;letter-spacing:-.01em;background:linear-gradient(100deg,var(--blue) 10%,#5e8dec 60%,#94b4f6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h1 .grad{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:1.12em;letter-spacing:-.01em;background:linear-gradient(100deg,var(--blue) 10%,#3f97dd 60%,#7ec5ec 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero-lead{margin:26px auto 0;font-size:clamp(17px,1.8vw,20px);color:var(--ink-dim);max-width:660px}
   .hero-ctas{margin-top:40px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .hero-note{margin-top:18px;font-size:13.5px;color:var(--ink-faint)}
@@ -203,7 +203,7 @@
   @media(max-width:960px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:620px){.svc-grid{grid-template-columns:1fr}}
   /* ---- Blue services band (white cards on blue) ---- */
-  .section-blue{position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(94,141,236,.28) 0%, rgba(94,141,236,0) 60%), linear-gradient(180deg,#0e3a7a 0%,#1648ae 52%,#1d5ad6 66%,#1d5ad6 100%)}
+  .section-blue{position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(63,151,221,.28) 0%, rgba(63,151,221,0) 60%), linear-gradient(180deg,#0e3a7a 0%,#1648ae 52%,#1d5ad6 66%,#1d5ad6 100%)}
   /* faint grid texture, echoing the hero, faded toward the edges */
   .section-blue::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -214,10 +214,10 @@
     -webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 42%, #000 50%, transparent 100%);
     mask-image:radial-gradient(ellipse 85% 75% at 50% 42%, #000 50%, transparent 100%);
   }
-  .section-blue .kicker{color:#c4d6fb}
-  .section-blue .kicker::before{background:#94b4f6}
+  .section-blue .kicker{color:#b6e0f3}
+  .section-blue .kicker::before{background:#7ec5ec}
   .section-blue h2{color:#fff}
-  .section-blue .lead{color:#dde8fc}
+  .section-blue .lead{color:#d6eefb}
 
   /* ============ Track record ============ */
   .rec-wrap{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -346,7 +346,7 @@
     background:linear-gradient(150deg,#0f172a,#0e3a7a);border-radius:var(--radius);
     padding:44px 38px;color:#fff;display:flex;flex-direction:column;position:relative;overflow:hidden;
   }
-  .contact-info::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(94,141,236,.16);bottom:-110px;right:-90px}
+  .contact-info::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(63,151,221,.16);bottom:-110px;right:-90px}
   .contact-info h3{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px;position:relative;z-index:2}
   .contact-info>p{color:rgba(255,255,255,.78);font-size:15.5px;position:relative;z-index:2}
   .ci-item{display:flex;gap:14px;align-items:flex-start;margin-top:24px;position:relative;z-index:2}
@@ -402,7 +402,7 @@
     transition:clip-path 1s cubic-bezier(.65,0,.35,1) .55s}
   .rv.in .uline-svg{clip-path:inset(0 0 0 0)}
   .uline-svg path{
-    fill:none;stroke:#7fa6f2;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    fill:none;stroke:#6fc0ea;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 
   @media(prefers-reduced-motion:reduce){
     .rv{opacity:1;transform:none;transition:none}
