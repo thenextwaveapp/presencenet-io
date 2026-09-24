@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About PresenceNet | The Origin of Proof of Presence</title>
+<meta name="description" content="How PresenceNet began: from a conversation about colour to a protocol on the XRP Ledger for cryptographic proof of human presence.">
+<meta name="theme-color" content="#0E3A7A">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563eb'/%3E%3Ccircle cx='12' cy='12' r='3.2' fill='none' stroke='%23fff' stroke-width='2'/%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23fff' stroke-width='1.6' stroke-dasharray='3 4' opacity='.8'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css?v=4">
+<style>
+  .doc-hero{background:linear-gradient(135deg,#0E3A7A 0%,#144AA5 100%);color:#fff;padding:110px 0 56px;text-align:center}
+  .doc-top-back{display:inline-flex;align-items:center;gap:7px;margin-bottom:20px;padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:600;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);transition:background .2s ease}
+  .doc-top-back:hover{background:rgba(255,255,255,.26)}
+  .doc-hero .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+  .doc-hero h1{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(40px,6vw,68px);line-height:1.05;margin:0 0 14px}
+  .doc-hero p{max-width:640px;margin:0 auto;font-size:17px;line-height:1.6;color:rgba(255,255,255,.9)}
+  .doc-wrap{max-width:760px;margin:0 auto;padding:64px 28px 90px}
+  .doc-wrap h2{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:34px;color:var(--ink);margin:56px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .doc-wrap h2:first-child{margin-top:0}
+  .doc-wrap h3{font-size:21px;font-weight:700;color:var(--ink);margin:38px 0 12px}
+  .doc-wrap h4{font-size:16px;font-weight:700;color:var(--blue);margin:26px 0 10px}
+  .doc-wrap p{font-size:17px;line-height:1.75;color:var(--ink-dim);margin:0 0 18px}
+  .doc-wrap p strong{color:var(--ink);font-weight:600}
+  .doc-wrap blockquote{margin:26px 0;padding:4px 0 4px 22px;border-left:3px solid var(--blue);font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:22px;line-height:1.5;color:var(--ink)}
+  .doc-wrap hr{border:none;border-top:1px solid var(--line);margin:44px 0}
+  .doc-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin:0 0 4px}
+  .doc-back{display:inline-flex;align-items:center;gap:8px;margin-top:40px;font-weight:600;color:var(--blue)}
+</style>
+</head>
+<body class="docs-page">
+<nav id="nav" aria-label="Protocol navigation">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo"><img src="../assets/logo.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
+    <div class="nav-links">
+      <a href="index.html">Protocol</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+<header class="doc-hero">
+  <div class="wrap">
+    <a class="doc-top-back" href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Back to Protocol</a>
+    <p class="kicker">About</p>
+    <h1>About PresenceNet</h1>
+    <p>A protocol for cryptographic proof of human presence &mdash; without surveillance.</p>
+  </div>
+</header>
+<main class="doc-wrap">
+<p class="doc-eyebrow">Origin</p>
+<h2>It started with a colour</h2>
+<p>PresenceNet began with a conversation about <strong>#818cf8</strong> &mdash; Tailwind&rsquo;s indigo-500. What started as interface work for Next Wave, a social wallet for sending XRP through human-readable $handles, turned into deeper questions about digital identity.</p>
+<p>Colour palettes led to personalization. Personalization led to shared identity in multi-signature vaults. And that surfaced a gap: multi-sig wallets let groups control money together, but they can&rsquo;t prove who actually participated. Platforms verify presence through surveillance and data collection. Nothing existed to prove human presence cryptographically without extracting personal data.</p>
+<p>The answer that emerged was <strong>the Mark</strong> &mdash; a minimal 0.00001 XRP transaction that serves as proof of presence without revealing anything else. By stripping economic value from the transaction, what&rsquo;s left is pure mathematical proof that a specific identity existed at a specific moment: immutable, permanent, and private by design. A visual detail for vault interfaces turned out to be foundational coordination infrastructure. The conversation that started with a colour ended with a protocol.</p>
+
+<h2>Las Vegas</h2>
+<p>PresenceNet was presented at the EasyA Shark Tank competition during XRP Las Vegas on May 30&ndash;31, 2025, and advanced to the finals. Beyond the result, the event connected the protocol with the XRP Ledger developer community &mdash; and PresenceNet found its technical foundation on XRPL.</p>
+
+<h2>Ottawa</h2>
+<p>On June 5, PresenceNet won the Stand With Crypto Canada pitch competition in the Impact category. On June 18, it received an award for infrastructure development at the Canadian Blockchain Consortium Policy Gala &mdash; Canada&rsquo;s premier event convening crypto builders and policymakers &mdash; positioning PresenceNet not as an app, but as foundational protocol architecture for coordination at scale.</p>
+
+<h2>Veila &amp; Next Wave</h2>
+<p><strong>Veila</strong> emerged in summer 2025 as the first AI platform built on PresenceNet&rsquo;s trace architecture &mdash; transparent reasoning that learns from cryptographically verified presence rather than surveillance.</p>
+<p><strong>Next Wave</strong> grew from a simple wallet into a full PresenceNet client. Every transaction, $handle interaction, and vault operation generates Marks, so people accumulate Trails of verified presence without ever touching the blockchain directly &mdash; which is how foundational infrastructure should feel.</p>
+
+<h2>Where it stands</h2>
+<p>PresenceNet is protocol infrastructure for human coordination at internet scale. The core primitives are deployed on the XRP Ledger, applications built on the protocol are live, and the developer toolkit keeps expanding. It addresses problems existing systems can&rsquo;t: verifiable group participation without surveillance, permanent memory without platform control, and portable identity without data extraction &mdash; built on XRPL, open to all builders, and owned by the people who use it.</p>
+  <a class="doc-back" href="index.html">&larr; Back to the Protocol</a>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="../index.html" class="logo"><img src="../assets/logo.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
+        <p class="foot-about">PresenceNet Inc. is an independent software and growth studio building custom software, lead generation, and SEO.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/mayorosa/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+          <a href="https://github.com/thenextwaveapp" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.02 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Protocol</h4>
+        <a href="index.html">Documentation</a>
+        <a href="about.html">About</a>
+        <a href="whitepaper.html">Whitepaper</a>
+        <a href="i-was-here.html">I Was Here (Book)</a>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#results">Results</a>
+        <a href="../index.html#about">About the Founder</a>
+        <a href="../index.html#faq">FAQ</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:hello@presencenet.io">hello@presencenet.io</a>
+        <p>Calgary, Alberta, Canada</p>
+        <a href="https://calendly.com/mayowarosanwo/quick-chat" target="_blank" rel="noopener">Book a Call</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>&copy; 2026 PresenceNet Inc. All rights reserved.</p>
+      <div class="foot-legal">
+        <a href="../index.html">Privacy Policy</a>
+        <a href="../index.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
