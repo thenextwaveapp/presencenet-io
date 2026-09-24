@@ -83,7 +83,7 @@
             <section id="overview" class="protocol-section">
                 <h2>Protocol Overview</h2>
                 <div class="overview-box">
-                    <p>PresenceNet is a decentralized protocol built on the XRP Ledger (XRPL) that cryptographically proves human conscious experience. It defines presence mathematically as:</p>
+                    <p>PresenceNet is a decentralized protocol built on the XRP Ledger (XRPL) that provides cryptographic infrastructure for verifying human presence. It defines presence mathematically as:</p>
                     <div class="formula-box">
                         <strong>Conscious Experience = Presence + Memory + Volitional Action</strong>
                     </div>
@@ -177,10 +177,11 @@
 
                 <h3>Properties</h3>
                 <ul>
-                    <li><strong>Minimal Cost:</strong> 0.00001 XRP ensures accessibility (1 billion marks = ~$100 in fees)</li>
+                    <li><strong>Minimal cost:</strong> 0.00001 XRP keeps marking accessible to everyone</li>
                     <li><strong>Cryptographically Verified:</strong> Ed25519 signatures ensure authenticity</li>
                     <li><strong>Encrypted Memos:</strong> Optional AES-256 encrypted payloads for privacy</li>
                     <li><strong>Immutable:</strong> Once on XRPL, marks cannot be altered or deleted</li>
+                    <li><strong>Erasable content:</strong> Mark contents are encrypted with keys each person controls. Destroying the key permanently erases the content, while the proof of presence remains on-chain.</li>
                 </ul>
             </section>
 
@@ -191,7 +192,7 @@
 
                 <h3>Trail Properties</h3>
                 <ul>
-                    <li><strong>Private by Default:</strong> Only you control visibility of your trail</li>
+                    <li><strong>Private by design:</strong> Mark contents are encrypted by default. Transaction metadata lives on the public XRP Ledger.</li>
                     <li><strong>Portable:</strong> Trails can be exported and synced across applications</li>
                     <li><strong>Verifiable:</strong> Cryptographic proofs enable selective disclosure</li>
                     <li><strong>Weighted:</strong> Trail weight accumulates through ritual completions</li>
@@ -480,7 +481,7 @@ const ritual = {
   ritual_id: "starter_circle_2025",
   ritual_archetype: "circle",
   host_handle: "$dev",
-  participant_handles: ["$alice", "$bob"],
+  invited_handles: ["$alice", "$bob"],
   start_time: "2025-06-01T10:00:00Z",
   end_time: "2025-06-01T12:00:00Z",
   required_mark_target: "$dev~presence",
@@ -571,8 +572,8 @@ console.log(trail.weight) // Trail weight</pre>
     <div class="foot-bottom">
       <p>&copy; 2026 PresenceNet Inc. All rights reserved.</p>
       <div class="foot-legal">
-        <a href="../index.html">Privacy Policy</a>
-        <a href="../index.html">Terms of Service</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Service</a>
       </div>
     </div>
   </div>

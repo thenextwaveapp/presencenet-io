@@ -11,4 +11,6 @@
   <url><loc>https://presencenet.io/protocol/whitepaper.html</loc><lastmod>2026-09-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://presencenet.io/protocol/about.html</loc><lastmod>2026-09-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://presencenet.io/protocol/i-was-here.html</loc><lastmod>2026-09-24</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://presencenet.io/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://presencenet.io/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
