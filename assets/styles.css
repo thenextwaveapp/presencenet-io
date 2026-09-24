@@ -467,6 +467,9 @@
   .about-protocol .ap-t{font-size:13.5px;color:var(--ink-dim)}
   .about-protocol svg{width:24px;height:24px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible;flex-shrink:0}
   .about-protocol:hover .svc-shaft{transform:scaleX(1);opacity:1}
+  /* dotted-underline inline link (e.g. PresenceNet Protocol mention) */
+  .dotlink{color:var(--blue);font-weight:600;text-decoration:underline;text-decoration-style:dotted;text-decoration-thickness:1.5px;text-underline-offset:4px;transition:color .2s ease}
+  .dotlink:hover{color:var(--blue-deep);text-decoration-style:solid}
   /* Client Feedback section hidden until real testimonials are in place (markup kept) */
   #testimonials{display:none}
   .about-gallery{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:52px}
