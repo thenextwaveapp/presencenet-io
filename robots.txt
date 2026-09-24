@@ -1,0 +1,5 @@
+# PresenceNet Inc.
+User-agent: *
+Allow: /
+
+Sitemap: https://presencenet.io/sitemap.xml
