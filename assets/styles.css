@@ -627,5 +627,5 @@
 
   /* Sub-pages: nav always visible (no hero to dock into) */
   body.subpage nav{transform:translateY(0);border-bottom-color:var(--line)}
-  /* clear the fixed nav with breathing room (beats .sec-sm's shorthand padding) */
-  body.subpage .page-top{padding-top:150px}
+  /* clear the 70px fixed nav with ~20px of air (beats .sec-sm's shorthand padding) */
+  body.subpage .page-top{padding-top:90px}
