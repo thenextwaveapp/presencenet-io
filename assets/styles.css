@@ -211,7 +211,7 @@
   @media(max-width:960px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:620px){.svc-grid{grid-template-columns:1fr}}
   /* ---- Blue services band (white cards on blue) ---- */
-  .section-blue{position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 0%, rgba(63,151,221,.28) 0%, rgba(63,151,221,0) 60%), linear-gradient(180deg,#0e3a7a 0%,#1648ae 52%,#1d5ad6 66%,#1d5ad6 100%)}
+  .section-blue{position:relative;overflow:hidden;background:radial-gradient(ellipse 85% 65% at 50% -8%, rgba(120,180,230,.18) 0%, rgba(120,180,230,0) 60%), linear-gradient(172deg,#0d3572 0%,#123f8c 32%,#1749a6 58%,#1c55c6 82%,#2360d6 100%)}
   /* faint grid texture, echoing the hero, faded toward the edges */
   .section-blue::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
