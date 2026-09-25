@@ -1,7 +1,7 @@
 {
   "name": "presencenet-io",
   "version": "1.0.0",
-  "description": "PresenceNet.io - The Home of Your Digital Soul",
+  "description": "PresenceNet Inc. — independent studio building custom software and growth systems",
   "main": "index.html",
   "scripts": {
     "start": "npx live-server --port=3000 --open=/",
@@ -16,6 +16,9 @@
   ],
   "author": "PresenceNet",
   "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.9.15"
+  },
   "devDependencies": {},
   "repository": {
     "type": "git",
