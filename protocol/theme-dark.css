@@ -1,0 +1,117 @@
+/* PresenceNet Protocol — unified dark theme (simplified blue-grey + one accent) */
+body.protocol-page{
+  --pd-bg:#0e141f; --pd-panel:#161d2a; --pd-panel2:#131a26; --pd-border:#26313f;
+  --pd-text:#c6d0de; --pd-dim:#8b98ac; --pd-head:#eef2f8; --pd-accent:#6fa8d6;
+  background:var(--pd-bg); color:var(--pd-text);
+}
+
+/* nav */
+body.protocol-page #nav{background:rgba(14,20,31,.9); border-bottom-color:var(--pd-border)}
+body.protocol-page .nav-links a{color:var(--pd-dim)}
+body.protocol-page .nav-links a:hover{color:#fff}
+
+/* header / hero — toned-down dark banner, not a bright blue block */
+body.protocol-page .protocol-header,
+body.protocol-page .doc-hero{background:linear-gradient(180deg,#141c2a 0%,#0e141f 100%); border-bottom:1px solid var(--pd-border); color:var(--pd-head)}
+body.protocol-page .protocol-header .subtitle,
+body.protocol-page .doc-hero p{color:var(--pd-dim)}
+body.protocol-page .doc-hero h1{color:var(--pd-head)}
+body.protocol-page .doc-hero .kicker{color:var(--pd-accent)}
+body.protocol-page .version-badge{background:rgba(111,168,214,.14); color:var(--pd-accent)}
+body.protocol-page .trinity-text{color:var(--pd-text)}
+body.protocol-page .protocol-actions a,
+body.protocol-page .doc-top-back{background:rgba(255,255,255,.05); border-color:var(--pd-border); color:var(--pd-text)}
+body.protocol-page .protocol-actions a:hover,
+body.protocol-page .doc-top-back:hover{background:rgba(111,168,214,.14)}
+
+/* TOC sidebar */
+body.protocol-page .toc-sidebar{background:var(--pd-panel); border-color:var(--pd-border); box-shadow:none}
+body.protocol-page .toc-link{color:var(--pd-dim)}
+body.protocol-page .toc-link:hover{background:var(--pd-panel2); color:var(--pd-head)}
+body.protocol-page .toc-link.active{background:var(--pd-accent); color:#0e141f}
+
+/* docs sections */
+body.protocol-page .protocol-section h2{color:var(--pd-head); border-bottom-color:var(--pd-border)}
+body.protocol-page .protocol-section h3{color:var(--pd-head)}
+body.protocol-page .protocol-section h4{color:var(--pd-accent)}
+body.protocol-page .protocol-section p,
+body.protocol-page .protocol-section li{color:var(--pd-text)}
+body.protocol-page .protocol-section li strong{color:var(--pd-head)}
+
+/* cards + panels — one panel tone */
+body.protocol-page .overview-box,
+body.protocol-page .feature-card,
+body.protocol-page .primitive-card,
+body.protocol-page .ritual-example,
+body.protocol-page .vault-mode,
+body.protocol-page .geometry-card,
+body.protocol-page .resource-card{background:var(--pd-panel); border-color:var(--pd-border); box-shadow:none}
+body.protocol-page .overview-box{border-left-color:var(--pd-accent)}
+body.protocol-page .archetype-card,
+body.protocol-page .chamber-use{background:var(--pd-panel2); border-color:var(--pd-border)}
+body.protocol-page .feature-card h3,
+body.protocol-page .primitive-card h3,
+body.protocol-page .ritual-example h4,
+body.protocol-page .vault-mode h4,
+body.protocol-page .geometry-card h4,
+body.protocol-page .archetype-card h4,
+body.protocol-page .chamber-use h4,
+body.protocol-page .resource-card h4{color:var(--pd-accent)}
+body.protocol-page .feature-card p,
+body.protocol-page .primitive-card p,
+body.protocol-page .ritual-example p,
+body.protocol-page .vault-mode p,
+body.protocol-page .geometry-card p,
+body.protocol-page .chamber-use p,
+body.protocol-page .archetype-card p,
+body.protocol-page .resource-card p{color:var(--pd-dim)}
+body.protocol-page .geometry-card p strong{color:var(--pd-accent)}
+body.protocol-page .formula-box{background:var(--pd-panel2); color:var(--pd-text); border:1px solid var(--pd-border)}
+body.protocol-page .formula-box strong{color:var(--pd-head)}
+body.protocol-page blockquote{color:var(--pd-text); border-left-color:var(--pd-accent)}
+
+/* code — Lucida Console */
+body.protocol-page .code-block{background:#0a0f17; border:1px solid var(--pd-border)}
+body.protocol-page .code-block pre,
+body.protocol-page .code-snippet{font-family:'Lucida Console','Lucida Sans Typewriter',Monaco,monospace; color:#d3dded}
+body.protocol-page .code-snippet{background:#0a0f17; border:1px solid var(--pd-border)}
+
+/* article sub-pages (whitepaper / about) */
+body.protocol-page .doc-wrap h2{color:var(--pd-head); border-bottom-color:var(--pd-border)}
+body.protocol-page .doc-wrap h3{color:var(--pd-head)}
+body.protocol-page .doc-wrap h4{color:var(--pd-accent)}
+body.protocol-page .doc-wrap p{color:var(--pd-text)}
+body.protocol-page .doc-wrap p strong{color:var(--pd-head)}
+body.protocol-page .doc-wrap blockquote{color:var(--pd-text); border-left-color:var(--pd-accent)}
+body.protocol-page .doc-wrap hr{border-top-color:var(--pd-border)}
+body.protocol-page .doc-eyebrow{color:var(--pd-accent)}
+body.protocol-page .doc-back{color:var(--pd-accent)}
+
+/* book (PDF) page */
+body.protocol-page .doc-hero .btn-primary{background:var(--pd-accent); color:#0e141f}
+body.protocol-page .doc-hero .btn-primary:hover{background:#8fbde3; color:#0e141f}
+body.protocol-page .doc-hero .btn-ghost{background:transparent; border-color:var(--pd-border); color:var(--pd-text)}
+body.protocol-page .doc-hero .btn-ghost:hover{background:rgba(255,255,255,.06); color:#fff}
+body.protocol-page .pdf-frame{background:var(--pd-panel); border-color:var(--pd-border)}
+body.protocol-page .pdf-note{color:var(--pd-dim)}
+
+/* footer */
+body.protocol-page footer{background:#0a0f17; border-top-color:var(--pd-border)}
+body.protocol-page footer .foot-about{color:var(--pd-dim)}
+body.protocol-page footer h4{color:var(--pd-head)}
+body.protocol-page footer a{color:var(--pd-dim)}
+body.protocol-page footer a:hover{color:#fff}
+body.protocol-page .foot-bottom{border-top-color:var(--pd-border)}
+body.protocol-page .foot-bottom p,
+body.protocol-page .foot-legal a{color:var(--pd-dim)}
+body.protocol-page .socials a{border-color:var(--pd-border)}
+body.protocol-page .socials svg{fill:var(--pd-dim)}
+
+/* loading screen */
+#protoLoader{position:fixed;inset:0;z-index:9999;background:#0e141f;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:22px;transition:opacity .55s ease, visibility .55s}
+#protoLoader.done{opacity:0;visibility:hidden}
+#protoLoader .pl-ring{width:56px;height:56px;border-radius:50%;border:2px solid rgba(111,168,214,.16);
+  border-top-color:#6fa8d6;animation:plspin .9s linear infinite}
+#protoLoader .pl-lbl{font-family:'IBM Plex Mono',monospace;color:#6fa8d6;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase}
+@keyframes plspin{to{transform:rotate(360deg)}}
