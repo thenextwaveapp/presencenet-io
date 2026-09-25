@@ -7,7 +7,7 @@
     <meta name="description" content="Technical documentation for the PresenceNet protocol: Marks, Trails, Rituals, and Vaults.">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/styles.css?v=8">
-    <link rel="stylesheet" href="/protocol/protocol.css?v=8">
+    <link rel="stylesheet" href="/protocol/protocol.css?v=9">
 <link rel="canonical" href="https://presencenet.io/protocol">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PresenceNet Inc.">
@@ -23,10 +23,11 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body class="protocol-page docs-page">
+    <div id="protoLoader"><div class="pl-ring"></div><div class="pl-lbl">PresenceNet Protocol</div></div>
     <!-- Navigation -->
     <nav id="nav" aria-label="Protocol navigation">
   <div class="nav-inner">
-    <a href="/" class="logo"><img src="../assets/logo.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
+    <a href="/" class="logo"><img src="/assets/logo-white.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
     <div class="nav-links">
       <a href="/protocol">Protocol</a>
       <a href="/protocol/about">About</a>
@@ -537,7 +538,7 @@ console.log(trail.weight) // Trail weight</pre>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a href="/" class="logo"><img src="../assets/logo.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
+        <a href="/" class="logo"><img src="/assets/logo-white.png" alt="PresenceNet Inc." class="logo-img logo-img-foot"></a>
         <p class="foot-about">PresenceNet Inc. is an independent software and growth studio building custom software, lead generation, and SEO.</p>
         <div class="socials">
           <a href="https://www.linkedin.com/in/mayorosa/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
@@ -581,5 +582,6 @@ console.log(trail.weight) // Trail weight</pre>
 
     <script src="/assets/site.js" defer></script>
     <script src="/protocol/protocol.js"></script>
+    <script>window.addEventListener('load',function(){var l=document.getElementById('protoLoader');if(!l)return;setTimeout(function(){l.classList.add('done');setTimeout(function(){l.remove();},600);},750);});</script>
 </body>
 </html>
